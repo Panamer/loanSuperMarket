@@ -1,7 +1,11 @@
-/* 不加 mui disabled的按钮颜色无变化 */
-
-input[type='button']:disabled {
-  opacity: 0.6;
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+body {
+  height: 100%;
+  font-family: "Microsoft Yahei", sans-serif;
+  background-color: #fefefe;
 }
 
 /* iPhone5及以下 */

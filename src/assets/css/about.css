@@ -1,12 +1,3 @@
-html,
-body {
-	background: #fafafa;
-	min-height: 100%;
-}
-
-.find-wrapper {
-	position: relative;
-}
 
 /* banner */
 .swiper-container {

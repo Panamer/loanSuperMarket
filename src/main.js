@@ -8,6 +8,8 @@ import '@/assets/js/flexible'
 import '@/assets/css/reset.css'
 import '@/assets/css/base.css'
 
+import 'mint-ui/lib/style.css';
+
 Vue.prototype.$http = api;
 Vue.config.productionTip = false
 

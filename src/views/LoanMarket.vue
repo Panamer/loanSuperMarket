@@ -1,5 +1,6 @@
 <template>
-  <div id="find" class="find-wrapper">
+  <v-layout>
+      <div id="find" class="find-wrapper">
         <div id="findBox">
             <!-- banner -->
             <mt-swipe :auto="3000" v-if="bannerList.length">
@@ -52,18 +53,25 @@
             </div>
         </section>
     </div>
+  </v-layout>
 </template>
 
 <script>
+// @ is an alias to /src
+import VLayout from '@/components/Layout.vue'
 import '@/assets/css/about.css'
 import { Toast, Swipe, SwipeItem } from 'mint-ui';
 
 export default {
+  name: 'home',
   data () {
     return {
       bannerList: [],
       loanList: []
     }
+  },
+  components: {
+    VLayout
   },
   mounted() {
     this.init()
@@ -100,6 +108,17 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
+.find-wrapper::-webkit-scrollbar {
+    width: 0px;
+}
+.find-wrapper {
+  width: 100%;
+  padding-top: 40px;
+  flex: 1;
+  -webkit-flex:1;
+  overflow: auto;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
 </style>
