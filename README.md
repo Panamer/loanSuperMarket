@@ -1,2 +1,0 @@
-# loanSuperMarket
-by or by
