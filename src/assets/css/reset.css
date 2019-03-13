@@ -1,0 +1,97 @@
+@charset "utf-8";
+body {
+  color: #333;
+  font-family: PingFangSC-Regular, Verdana, Arial, sans-serif;
+  font-size: 0.15rem;
+}
+
+body,
+header,
+footer,
+nav,
+section,
+article,
+aside,
+figure,
+figcaption,
+ul,
+ol,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+table,
+td,
+img,
+div,
+tr,
+a {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+input,
+select {
+  vertical-align: middle;
+  outline: none;
+  border: 0 none;
+}
+
+textarea,
+input {
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 0px;
+  outline: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  border: 0 none;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.o-hidden {
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  zoom: 1;
+  clear: both;
+  height: 0;
+}

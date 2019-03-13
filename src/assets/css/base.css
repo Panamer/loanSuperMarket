@@ -1,0 +1,26 @@
+/* 不加 mui disabled的按钮颜色无变化 */
+
+input[type='button']:disabled {
+  opacity: 0.6;
+}
+
+/* iPhone5及以下 */
+@media screen and (max-width: 320px) {
+  html {
+    font-size: 85.3333px;
+  }
+}
+
+/* iPhone6 */
+@media screen and (min-width: 321px) and (max-width: 375px) {
+  html {
+    font-size: 100px;
+  }
+}
+
+/* iPhone6及以上 */
+@media screen and (min-width: 376px) {
+  html {
+    font-size: 110.4px;
+  }
+}

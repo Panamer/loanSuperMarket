@@ -1,0 +1,222 @@
+html,
+body {
+	background: #fafafa;
+	min-height: 100%;
+}
+
+.find-wrapper {
+	position: relative;
+}
+
+/* banner */
+.swiper-container {
+    width: 100%;
+    height: 1.22rem;
+}
+
+.banner-bullet {
+	display: inline-block;
+	width: .05rem;
+	height: .05rem;
+	opacity: 0.3;
+	background: #ffffff;
+	border-radius: 50%;
+	margin-left: .025rem;
+	margin-right: .025rem;
+}
+
+.banner-bullet.banner-bullet-active {
+	opacity: 1;
+	background: #ffffff;
+}
+
+.swiper-slide a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide img {
+	width: 100%;
+	height: 100%;
+}
+
+/* describe */
+.find-wrapper .describe {
+	font-size: .13rem;
+	color: #999999;
+	letter-spacing: 0;
+	line-height: .12rem;
+	padding: .17rem .1rem 0;
+}
+
+/* content list */
+.find-list {
+	padding: .15rem .1rem;
+}
+
+.find-list > li {
+	background: #FFFFFF;
+	border: .01rem solid #F0F0F0;
+	box-shadow: 0 0 3px 0 rgba(200, 200, 200, 0.11);
+	border-radius: 4px;
+	margin-bottom: .15rem;
+	padding: 0 .2rem;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.find-list .supermarket {
+	padding-top: .15rem;
+	padding-bottom: .1rem;
+}
+
+.supermarket h3 {
+	height: .2rem;
+	line-height: .22rem;
+	font-size: .16rem;
+	color: #333333;
+}
+
+.supermarket h3 i {
+	float: left;
+	width: .2rem;
+	height: .2rem;
+	background-size: 100% 100%;
+	margin-right: .105rem;
+}
+
+.supermarket-content {
+	padding-top: .11rem;
+	padding-bottom: .14rem;
+}
+
+.supermarket-content li {
+	float: left;
+	height: .53rem;
+}
+
+.supermarket-content li:first-child {
+	border-right: 2px dashed #ececec;
+	min-width: 1.08rem;
+}
+
+.supermarket-content li:first-child .money {
+	font-size: .18rem;
+	height: .34rem;
+	line-height: .34rem;
+	color: #FF3D54;
+}
+
+.supermarket-content li:first-child .range {
+	font-size: .11rem;
+	color: #999999;
+}
+
+.supermarket-content li:nth-child(2) {
+	padding-left: .12rem;
+}
+
+.supermarket-content li:nth-child(2) p {
+	font-size: .12rem;
+	color: #666666;
+	line-height: .12rem;
+	margin-bottom: .08rem;
+}
+
+.supermarket-content li:last-child {
+	float: right;
+	display: flex;
+	align-items: center;
+}
+
+.supermarket-content li:last-child a {
+	display: block;
+	width: .65rem;
+	text-align: center;
+	padding: .05rem 0;
+	font-size: .14rem;
+	color: #FFFFFF;
+	background-image: url(../images/apply-btn.png);
+	background-size: 100% 100%;
+}
+
+.supermarket .desc {
+	border-top: 1px solid #f0f0f0;
+	padding-top: .1rem;
+	font-size: .12rem;
+	color: #666666;
+	line-height: .12rem;
+}
+
+.find-list .card {
+	padding-top: .2rem;
+	padding-bottom: .2rem;
+}
+
+.card .card-img {
+	width: .95rem;
+	height: .6rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: .03rem;
+	background: #cccccc;
+}
+
+.find-list .card img {
+	width: 100%;
+	height: 100%;
+}
+
+.find-list .card .default-img {
+	filter: grayscale(100%);
+	width: 80%;
+	height: auto;
+}
+
+.card .desc {
+	width: 2.06rem;
+}
+
+.card div h3 {
+	margin-bottom: .07rem;
+}
+
+.card div p {
+	font-size: .12rem;
+	color: #666666;
+	line-height: .16rem;
+}
+
+/* error info */
+.error-page {
+	display: none;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.error-page .error-tip {
+	width: 1.68rem;
+	height: 1.173rem;
+	background: url(../images/error@2x.png) no-repeat;
+	background-size: contain;
+}
+
+.error-text {
+	text-align: center;
+	color: #999999;
+	font-size: .18rem;
+}
+
+.error-text p:last-child {
+	font-size: .14rem;
+}
