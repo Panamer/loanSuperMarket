@@ -1,6 +1,7 @@
 <template>
   <v-layout>
-      <div id="find" class="find-wrapper">
+      <div class="find-wrapper">
+        <div class="title-name">下款牛市</div>
         <div id="findBox">
             <!-- banner -->
             <mt-swipe :auto="3000" v-if="bannerList.length">
@@ -60,7 +61,7 @@
 // @ is an alias to /src
 import VLayout from '@/components/Layout.vue'
 import '@/assets/css/about.css'
-import { Toast, Swipe, SwipeItem } from 'mint-ui';
+import { Toast, Swipe, SwipeItem, MessageBox } from 'mint-ui'
 
 export default {
   name: 'home',
@@ -71,39 +72,51 @@ export default {
     }
   },
   components: {
-    VLayout
+    VLayout,
+    'mt-swipe': Swipe,
+    'mt-swipe-item': SwipeItem
   },
-  mounted() {
+  mounted () {
     this.init()
   },
   methods: {
-    init() {
-      this.getLifeBannerList();
-      this.getCreditMarketList();
+    init () {
+      this.getLifeBannerList()
+      this.getCreditMarketList()
     },
     // 跳转第三方(后期需加埋点)
-    toThirdParty(url) {
-      window.location.href = url;
+    toThirdParty (url) {
+      MessageBox({
+        message: '您还未登录，请先去登录？',
+        confirmButtonText: '去登录'
+      }).then(action => {
+        window.location.href = url
+      })
     },
     // 获取 banner 列表
-    getLifeBannerList() {
-      this.$http.getBannerList({ 'app_platform': 'h5' }).then(res => {
-        if (res.data.code === '000') {
-          this.bannerList = res.data.data.result;
-        } else {
-          Toast(res.data.msg);
-        }
-      });
+    getLifeBannerList () {
+      this.bannerList = [
+        { imagePath: 'http://dummyimage.com/200x100/FF6600' },
+        { imagePath: 'http://dummyimage.com/200x100/50B347/FFF&text=Mock.js' },
+        { imagePath: 'http://dummyimage.com/200x100/4A7BF7&text=Hello' },
+        { imagePath: 'http://dummyimage.com/200x100/894FC4/FFF.png&text=!' }]
+      // this.$http.getBannerList({ 'app_platform': 'h5' }).then(res => {
+      //   if (res.data.code === '000') {
+      //     // this.bannerList = res.data.data.result;
+      //   } else {
+      //     Toast(res.data.msg);
+      //   }
+      // });
     },
     // 获取贷款超市列表
-    getCreditMarketList() {
+    getCreditMarketList () {
       this.$http.getCreditMarketList({ 'app_platform': 'app' }).then(res => {
         if (res.data.code === '000') {
-          this.loanList = res.data.data.creditMarketList;
+          this.loanList = res.data.data.creditMarketList
         } else {
-          Toast(res.data.msg);
+          Toast(res.data.msg)
         }
-      });
+      })
     }
   }
 }
@@ -114,11 +127,31 @@ export default {
 }
 .find-wrapper {
   width: 100%;
-  padding-top: 40px;
+  // padding-top: 40px;
   flex: 1;
   -webkit-flex:1;
   overflow: auto;
   height: 100%;
   -webkit-overflow-scrolling: touch;
+  .mint-swipe {
+    height: 122px;
+    width: (355rem/100);
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .title-name{
+    width: 100%;
+    text-align: center;
+    line-height: 56px;
+    font-size: 16px;
+    color: #666666;
+  }
 }
 </style>
