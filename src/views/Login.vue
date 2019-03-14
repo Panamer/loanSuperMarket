@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import { Toast, Spinner } from 'mint-ui';
-import VMessageCode from '@/components/MessageCode.vue';
+import { Toast, Spinner } from 'mint-ui'
+import VMessageCode from '@/components/MessageCode.vue'
 
 export default {
   name: 'login',
@@ -55,57 +55,60 @@ export default {
       // ! demo src
       imgCodeSrc: 'data:image/*;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAUCAIAAACVui2AAAACNklEQVR42rWYy03GMBCE0wUnRBmcuf+9UAXiyI0qONMIBQUjo2WYmR37RyKyojzWjr992jmOfzje3z70dpyrWbGrxvyzzNdxnucQPd3xeH+DrZ7X1Oft7cvdsk1hxKZBlseOMMro+L+AaSyFxFua/Saw5VSG16dLtcD2cHleNsJm4GpKa5lVnajpuhi0+lCBxwVCTpmAvQlM5jkoutC2ag3VQr3tTFe21W+T4iab+pp9uHTpQUtzYwtXBwQmiwVgG58T2JpXO6Ilca6oiBz29ZZo8ZVJWp0/T13Yz3TWnrTBk615qZHlQ84j81phjmHKzBrAql0bydafrYUtLQorcIgOotWPfgNb10XmulbtdqmLMnNwQo1elK+8ZdVhndmqlYGpc6jAXcR26Yo+rFO3Fq4Letv5VwA2Lt3lrcxsvRSjN6fxzmNJsnNpnQAWXlQung+yDBWkfTvj5+dKwypI5a0/d0krBMgsvCHiuA5rfrbYlplmqcAdjPXYTh1L4M6N2xgOi8euVqkN7ULSotoUTQOGcoVdyLzWDAys5rU5rAsh9WfrUTqPUJMQuBuhaEPZWwDboNe3Fri2CiGfU68ATLTKPM9l3p068hPDYQmti0q7nCB/zkbukhaVq5As6iFujEJOXVjYrr1yZdIAtvPT7ri00H1SyI4YvWEP5126Y+72EspM/pyXuxa42xXaFVjVXtwqdGJ1bX6A6JIDt5Dhf0oBlzztPekh/Z3Bfb/Kdx+15Ze64MNPq+0ga9KWadQAAAAASUVORK5CYII=',
       messageCode: ''
-    };
+    }
   },
   components: {
     VMessageCode,
     'mt-spinner': Spinner
   },
   computed: {
-    submitDisabled() {
-      return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0;
+    submitDisabled () {
+      return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0
     }
   },
   methods: {
     // 重新获取图片验证码
-    getImgCode() {
-      console.log('重新获取图片验证码');
+    getImgCode () {
+      console.log('重新获取图片验证码')
     },
     // 发送短信验证码
-    sendMessagecode() {
+    sendMessagecode () {
       if (!this.mobile) {
-        Toast('请输入手机号');
-        return;
+        Toast('请输入手机号')
+        return
       }
       if (this.mobile.length < 11) {
-        Toast('请输入正确手机号');
-        return;
+        Toast('请输入正确手机号')
+        return
       }
       return new Promise((resolve, reject) => {
-        resolve(this.$refs.messageCode.getMessageCode());
-      });
+        resolve(this.$refs.messageCode.getMessageCode())
+      })
     },
     // 提交
-    submit() {
+    submit () {
       if (this.loading) {
-        return;
+        return
       }
       let data = {
         mobile: this.mobile,
         imgCode: this.imgCode,
         messageCode: this.messageCode
-      };
-      console.log(data);
-      this.loading = true;
+      }
+      console.log(data)
+      this.loading = true
       return new Promise((resolve, reject) => {
         resolve(setTimeout(() => {
-          Toast('短信验证码验证失败');
-          this.loading = false;
-        }, 1000));
-      });
+          Toast('短信验证码验证失败')
+          this.loading = false
+          this.$router.push({
+            name: 'loanMarket'
+          })
+        }, 1000))
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
