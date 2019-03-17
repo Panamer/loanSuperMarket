@@ -18,7 +18,7 @@
                     <ul id="supermarket" class="find-list" v-for="(v, index) in loanList" :key="index">
                       <li class="supermarket">
                         <h3>
-                            <i style="background-image: url(${v.icardUrl});"></i>
+                            <i :style="{backgroundImage: 'url(' + v.icardUrl + ')'}"></i>
                             {{v.creditName}}
                         </h3>
                         <ul class="supermarket-content clearfix">
@@ -64,7 +64,7 @@ import '@/assets/css/about.css'
 import { Toast, Swipe, SwipeItem, MessageBox } from 'mint-ui'
 
 export default {
-  name: 'home',
+  name: 'loanMarket',
   data () {
     return {
       bannerList: [],
@@ -78,6 +78,8 @@ export default {
   },
   mounted () {
     this.init()
+  },
+  computed: {
   },
   methods: {
     init () {

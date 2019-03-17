@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrapper">
-        <p class="title">贷超流量</p>
+      <img class="photo" src="../assets/images/touxiang.png" alt="">
       <form class="form-wrapper" @submit.prevent="submit">
         <div class="form-item">
           <div>
@@ -140,9 +140,10 @@ export default {
   }
 }
 .form-btn-wrapper {
-  margin-top: 85px;
+  margin-top: 65px;
   .form-btn {
     letter-spacing: 10px;
+    background-color: #ffffff;
   }
 }
 </style>

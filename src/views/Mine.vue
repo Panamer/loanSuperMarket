@@ -3,7 +3,7 @@
         <div class="mine-wrapper">
             <div class="mine-top">
                 <img src="../assets/images/touxiang.png" alt="">
-                <p>手机号：<span>13688889999</span></p>
+                <p class="monile">手机号：<span>13688889999</span></p>
             </div>
             <div class="mine-white"></div>
             <div class="mine-button" @click="loginOut">退出登录</div>
@@ -62,9 +62,11 @@ export default {
         margin: 0 auto 20px;;
         display: block;
     }
-    p{
+    .monile{
         width: 100%;
         text-align: center;
+        color: #ffffff;
+        font-size: 16px;
     }
 }
 .mine-white{
