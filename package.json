@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "js-md5": "^0.7.3",
     "mint-ui": "^2.2.13",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",

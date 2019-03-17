@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import VTabbar from '@/components/Tabbar';
+import VTabbar from '@/components/Tabbar'
 
 export default {
   name: 'layout',
   components: {
     VTabbar
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

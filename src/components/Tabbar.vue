@@ -15,21 +15,21 @@
 </template>
 
 <script>
-import CONST from '@/assets/js/const';
+import CONST from '@/assets/js/const'
 
 export default {
   name: 'tabber',
-  data() {
+  data () {
     return {
       menus: CONST.menus
-    };
+    }
   },
   methods: {
-    clickMenus(path) {
-      this.$router.replace(path);
+    clickMenus (path) {
+      this.$router.replace(path)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

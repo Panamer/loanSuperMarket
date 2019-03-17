@@ -9,30 +9,30 @@
 </template>
 
 <script>
-let [initNum, initText] = [60, '点击获取'];
+let [initNum, initText] = [60, '点击获取']
 
 export default {
-  data() {
+  data () {
     return {
       messageText: initText,
       countDown: initNum
-    };
+    }
   },
   methods: {
-    getMessageCode() {
-      this.messageText = `重新获取${this.countDown}s`;
-      this.countDown--;
+    getMessageCode () {
+      this.messageText = `重新获取${this.countDown}s`
+      this.countDown--
       setTimeout(() => {
         if (this.countDown === 0) {
-          this.messageText = initText;
-          this.countDown = initNum;
+          this.messageText = initText
+          this.countDown = initNum
         } else {
-          this.getMessageCode();
+          this.getMessageCode()
         }
-      }, 1000);
+      }, 1000)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

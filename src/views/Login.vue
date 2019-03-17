@@ -69,7 +69,9 @@ export default {
   methods: {
     // 重新获取图片验证码
     getImgCode () {
-      console.log('重新获取图片验证码')
+      this.$http.getCaptcha().then((res) => {
+        console.log('重新获取图片验证码')
+      })
     },
     // 发送短信验证码
     sendMessagecode () {
