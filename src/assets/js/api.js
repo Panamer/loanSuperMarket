@@ -1,12 +1,13 @@
 import axios from 'axios'
 import md5 from 'js-md5'
+import qs from 'qs'
+
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
 axios.interceptors.request.use(config => {
   Object.assign(config.headers, {
-    deviceInfo: JSON.stringify({}),
-    sign: md5('123456')
+    deviceInfo: JSON.stringify({})
   })
-  config.data = md5(JSON.stringify(config.data))
   return config
 }, error => {
   console.log(error)
@@ -43,10 +44,15 @@ const API = {
   },
   // 获取图形验证码接口
   getCaptcha (options = {}) {
-    Object.assign(options, {
-      sign: '123456'
-    })
-    return axios.post('/api/user/captcha/info', options)
+    let data = null;
+    console.log(Object.keys(options));
+    if (Object.keys(options).length > 0) {
+       console.log('1');
+      data = 'sign=' + md5(qs.stringify(options) + '&key=123456')
+    } else {
+      data = 'sign=' + md5('&key=123456').toUpperCase()
+    }
+    return axios.post('/api/user/captcha/info', data)
   }
 }
 export default API
