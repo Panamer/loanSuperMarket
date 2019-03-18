@@ -3,7 +3,7 @@
         <div class="mine-wrapper">
             <div class="mine-top">
                 <img src="../assets/images/touxiang.png" alt="">
-                <p class="monile">手机号：<span>13688889999</span></p>
+                <p class="monile">手机号：<span>{{phone}}</span></p>
             </div>
             <div class="mine-white"></div>
             <div class="mine-button" @click="loginOut">退出登录</div>
@@ -18,6 +18,7 @@ export default {
   name: 'loan',
   data () {
     return {
+      phone: localStorage.getItem("phone")
     }
   },
   components: {
@@ -26,9 +27,13 @@ export default {
   methods: {
     loginOut () {
       MessageBox.confirm('确认退出 ').then(action => {
-        Toast('退出成功')
-        this.$router.push({
-          name: 'login'
+        this.$http.logout().then(res => {
+          Toast('退出成功')
+          localStorage.removeItem("token");
+          localStorage.removeItem("phone");
+          this.$router.push({
+            name: 'login'
+          })
         })
       })
     }

@@ -88,12 +88,18 @@ export default {
     },
     // 跳转第三方(后期需加埋点)
     toThirdParty (url) {
-      MessageBox({
-        message: '您还未登录，请先去登录？',
-        confirmButtonText: '去登录'
-      }).then(action => {
-        window.location.href = url
-      })
+      if (localStorage.getItem("phone")) {
+        window.location.href = 'https://cli.vuejs.org/zh/guide/#%E8%AF%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E4%BB%B6'
+      } else {
+        MessageBox({
+          message: '您还未登录，请先去登录？',
+          confirmButtonText: '去登录'
+        }).then(action => {
+          this.$router.push({
+            name: 'login'
+          })
+        })
+      }
     },
     // 获取 banner 列表
     getLifeBannerList () {
@@ -112,9 +118,13 @@ export default {
     },
     // 获取贷款超市列表
     getCreditMarketList () {
-      this.$http.getCreditMarketList({ 'app_platform': 'app' }).then(res => {
-        if (res.data.code === '000') {
-          this.loanList = res.data.data.creditMarketList
+      this.$http.getCreditMarketList({
+        fromSource: 'H5',
+        page: 1,
+        pageSize: 10
+      }).then(res => {
+        if (res.data.code === 1) {
+          this.loanList = res.data.response.cont
         } else {
           Toast(res.data.msg)
         }
