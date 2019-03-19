@@ -24,6 +24,13 @@ export default {
   components: {
     VLayout
   },
+  beforeRouteEnter(to, from, next){
+    if (!localStorage.getItem('phone')) {
+      next({
+        name: 'login'
+      });
+    }
+  },
   methods: {
     loginOut () {
       MessageBox.confirm('确认退出 ').then(action => {
@@ -32,7 +39,7 @@ export default {
           localStorage.removeItem('token')
           localStorage.removeItem('phone')
           this.$router.push({
-            name: 'login'
+            name: 'loanMarket'
           })
         })
       })

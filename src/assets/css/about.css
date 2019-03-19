@@ -134,8 +134,10 @@
 	padding: .05rem 0;
 	font-size: .14rem;
 	color: #FFFFFF;
-	background-image: url(../images/apply-btn.png);
-	background-size: 100% 100%;
+	background-color: #e21a1ac4;
+    border-radius: 4px;
+	/* background-image: url(../images/apply-btn.png);
+	background-size: 100% 100%; */
 }
 
 .supermarket .desc {

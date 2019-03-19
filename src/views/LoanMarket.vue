@@ -159,11 +159,13 @@ export default {
     }
   }
   .title-name{
+    position: absolute;
+    top: 6px;
     width: 100%;
     text-align: center;
-    line-height: 56px;
-    font-size: 16px;
-    color: #666666;
+    font-size: 12px;
+    z-index: 2;
+    color: #ffffff;
   }
 }
 </style>

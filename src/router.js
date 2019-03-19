@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path: '/',
@@ -30,7 +30,14 @@ export default new Router({
     {
       path: '/mine',
       name: 'mine',
-      component: resolve => require(['@/views/Mine.vue'], resolve)
+      component: resolve => require(['@/views/Mine.vue'], resolve),
+      meta: {
+        title: '我的',
+        auth: false
+      }
     }
   ]
 })
+
+
+export default router;
