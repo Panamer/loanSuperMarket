@@ -67,15 +67,15 @@ export default {
       return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0
     }
   },
-  mounted() {
-    this.getImgCode();
+  mounted () {
+    this.getImgCode()
   },
   methods: {
     // 重新获取图片验证码
     getImgCode () {
       this.$http.getCaptcha().then((res) => {
-        this.imgCodeSrc = `data:image/*;base64,${res.data.response.cont.captchacont}`;
-        this.captchakey = res.data.response.cont.captchakey;
+        this.imgCodeSrc = `data:image/*;base64,${res.data.response.cont.captchacont}`
+        this.captchakey = res.data.response.cont.captchakey
       })
     },
     // 发送短信验证码
@@ -95,7 +95,7 @@ export default {
       this.$http.getMessage({
         captcha: this.imgCode,
         captchakey: this.captchakey,
-        phone: this.mobile,
+        phone: this.mobile
       }).then((res) => {
         this.$refs.messageCode.getMessageCode()
       })
@@ -112,8 +112,8 @@ export default {
       }).then((res) => {
         this.loading = false
         if (res.data.code === 1) {
-          localStorage.setItem("token",res.data.response.cont.token);
-          localStorage.setItem("phone",res.data.response.cont.phone);
+          localStorage.setItem('token', res.data.response.cont.token)
+          localStorage.setItem('phone', res.data.response.cont.phone)
           this.$router.push({
             name: 'loanMarket'
           })

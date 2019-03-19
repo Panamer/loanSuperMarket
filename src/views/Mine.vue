@@ -18,7 +18,7 @@ export default {
   name: 'loan',
   data () {
     return {
-      phone: localStorage.getItem("phone")
+      phone: localStorage.getItem('phone')
     }
   },
   components: {
@@ -29,8 +29,8 @@ export default {
       MessageBox.confirm('确认退出 ').then(action => {
         this.$http.logout().then(res => {
           Toast('退出成功')
-          localStorage.removeItem("token");
-          localStorage.removeItem("phone");
+          localStorage.removeItem('token')
+          localStorage.removeItem('phone')
           this.$router.push({
             name: 'login'
           })

@@ -88,7 +88,7 @@ export default {
     },
     // 跳转第三方(后期需加埋点)
     toThirdParty (url) {
-      if (localStorage.getItem("phone")) {
+      if (localStorage.getItem('phone')) {
         window.location.href = 'https://cli.vuejs.org/zh/guide/#%E8%AF%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E4%BB%B6'
       } else {
         MessageBox({

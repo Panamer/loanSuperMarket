@@ -12,14 +12,14 @@ module.exports = {
     port: 8080,
     https: false,
     hotOnly: true,
-    proxy: {
-      '/api': {
-        target: 'http://47.104.189.49:9092',
-        changeOrigin: true,
-        pathRewrite: { '^/api': '' },
-        secure: false
-      }
-    }, // 设置代理
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://47.104.189.49:9092',
+    //     changeOrigin: true,
+    //     pathRewrite: { '^/api': '' },
+    //     secure: false
+    //   }
+    // }, // 设置代理
     before: app => {}
   },
   // 第三方插件配置
