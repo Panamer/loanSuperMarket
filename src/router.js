@@ -3,11 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const router =  new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'index',
       redirect: {
         name: 'loanMarket'
       }
@@ -30,14 +30,9 @@ const router =  new Router({
     {
       path: '/mine',
       name: 'mine',
-      component: resolve => require(['@/views/Mine.vue'], resolve),
-      meta: {
-        title: '我的',
-        auth: false
-      }
+      component: resolve => require(['@/views/Mine.vue'], resolve)
     }
   ]
 })
 
-
-export default router;
+export default router

@@ -1,3 +1,4 @@
+const VConsolePlugin = require('vconsole-webpack-plugin')
 module.exports = {
   // 基本路径
   publicPath: '/',
@@ -25,5 +26,12 @@ module.exports = {
   // 第三方插件配置
   pluginOptions: {
   // ...
+  },
+  configureWebpack: {
+    plugins: [
+      new VConsolePlugin({
+        enable: process.env.NODE_ENV !== 'production'
+      })
+    ]
   }
 }

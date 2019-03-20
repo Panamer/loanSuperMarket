@@ -74,8 +74,12 @@ export default {
     // 重新获取图片验证码
     getImgCode () {
       this.$http.getCaptcha().then((res) => {
-        this.imgCodeSrc = `data:image/*;base64,${res.data.response.cont.captchacont}`
-        this.captchakey = res.data.response.cont.captchakey
+        if (res.data.code === 1) {
+          this.imgCodeSrc = `data:image/*;base64,${res.data.response.cont.captchacont}`
+          this.captchakey = res.data.response.cont.captchakey
+        } else {
+          Toast(res.data.msg)
+        }
       })
     },
     // 发送短信验证码
@@ -97,7 +101,11 @@ export default {
         captchakey: this.captchakey,
         phone: this.mobile
       }).then((res) => {
-        this.$refs.messageCode.getMessageCode()
+        if (res.data.code === 1) {
+          this.$refs.messageCode.getMessageCode()
+        } else {
+          Toast(res.data.msg)
+        }
       })
     },
     // 提交

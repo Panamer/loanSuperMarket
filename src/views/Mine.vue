@@ -24,23 +24,29 @@ export default {
   components: {
     VLayout
   },
-  beforeRouteEnter(to, from, next){
+  beforeRouteEnter (to, from, next) {
     if (!localStorage.getItem('phone')) {
       next({
         name: 'login'
-      });
+      })
+    } else {
+      next()
     }
   },
   methods: {
     loginOut () {
       MessageBox.confirm('确认退出 ').then(action => {
         this.$http.logout().then(res => {
-          Toast('退出成功')
-          localStorage.removeItem('token')
-          localStorage.removeItem('phone')
-          this.$router.push({
-            name: 'loanMarket'
-          })
+          if (res.data.code === 1) {
+            Toast('退出成功')
+            localStorage.removeItem('token')
+            localStorage.removeItem('phone')
+            this.$router.push({
+              name: 'loanMarket'
+            })
+          } else {
+            Toast(res.data.msg)
+          }
         })
       })
     }

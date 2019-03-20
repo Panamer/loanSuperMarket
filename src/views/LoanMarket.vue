@@ -89,7 +89,7 @@ export default {
     // 跳转第三方(后期需加埋点)
     toThirdParty (url) {
       if (localStorage.getItem('phone')) {
-        window.location.href = 'https://cli.vuejs.org/zh/guide/#%E8%AF%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E4%BB%B6'
+        window.location.href = url
       } else {
         MessageBox({
           message: '您还未登录，请先去登录？',
@@ -108,13 +108,6 @@ export default {
         { imagePath: 'http://dummyimage.com/200x100/50B347/FFF&text=Mock.js' },
         { imagePath: 'http://dummyimage.com/200x100/4A7BF7&text=Hello' },
         { imagePath: 'http://dummyimage.com/200x100/894FC4/FFF.png&text=!' }]
-      // this.$http.getBannerList({ 'app_platform': 'h5' }).then(res => {
-      //   if (res.data.code === '000') {
-      //     // this.bannerList = res.data.data.result;
-      //   } else {
-      //     Toast(res.data.msg);
-      //   }
-      // });
     },
     // 获取贷款超市列表
     getCreditMarketList () {
