@@ -19,7 +19,7 @@
                       <li class="supermarket">
                         <h3>
                             <i :style="{backgroundImage: 'url(' + v.icardUrl + ')'}"></i>
-                            {{v.creditName}}
+                            {{v.accountName}}
                         </h3>
                         <ul class="supermarket-content clearfix">
                             <li>
