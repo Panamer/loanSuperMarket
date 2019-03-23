@@ -31,6 +31,16 @@ const router = new Router({
       path: '/mine',
       name: 'mine',
       component: resolve => require(['@/views/Mine.vue'], resolve)
+    },
+    {
+      path: '/spread',
+      name: 'spread',
+      component: resolve => require(['@/views/Spread.vue'], resolve)
+    },
+    {
+      path: '/download',
+      name: 'download',
+      component: resolve => require(['@/views/Download.vue'], resolve)
     }
   ]
 })
