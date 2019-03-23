@@ -121,7 +121,7 @@ export default {
           localStorage.setItem('token', res.data.response.cont.token)
           localStorage.setItem('phone', res.data.response.cont.phone)
           this.$router.push({
-            name: 'login'
+            name: 'download'
           })
         } else {
           Toast(res.data.msg)
