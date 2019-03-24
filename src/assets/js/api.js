@@ -1,15 +1,16 @@
 import axios from 'axios'
 import md5 from 'js-md5'
 import qs from 'qs'
+import { mobileSyatem } from './utils.js'
 
 const baseURL = 'http://47.104.189.49:9092'
 
-axios.defaults.baseURL = baseURL
+axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 
 axios.interceptors.request.use(config => {
   Object.assign(config.headers, {
-    deviceInfo: JSON.stringify({})
+    deviceInfo: JSON.stringify({ channel: mobileSyatem() })
   })
   return config
 }, error => {
@@ -46,6 +47,14 @@ const API = {
   },
   // 登录接口
   login (options = {}) {
+    Object.assign(options, {
+      sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
+    })
+    return axios.post('/user/login', qs.stringify(options))
+  },
+  // 推广登录接口
+  loginForSpread (options = {}) {
+    // axios.defaults.headers.deviceInfo = JSON.stringify({ channel: mobileSyatem()})
     Object.assign(options, {
       sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
     })

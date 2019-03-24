@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { Toast, Spinner } from 'mint-ui'
+import { Toast } from 'mint-ui'
 import VMessageCode from '@/components/MessageCode.vue'
 
 export default {
@@ -57,8 +57,7 @@ export default {
     }
   },
   components: {
-    VMessageCode,
-    'mt-spinner': Spinner
+    VMessageCode
   },
   computed: {
     submitDisabled () {
@@ -112,7 +111,7 @@ export default {
         return
       }
       this.loading = true
-      this.$http.login({
+      this.$http.loginForSpread({
         code: this.messageCode,
         phone: this.mobile
       }).then((res) => {

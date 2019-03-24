@@ -8,22 +8,22 @@
 
 <script>
 export default {
-  created() {
+  created () {
     if (!this.is_weixin()) {
       window.location.href = 'http://download.qihangdai.566.sh/download.html'
     }
   },
   methods: {
-    is_weixin() {
-      var ua = navigator.userAgent.toLowerCase();
-      if (ua.match(/MicroMessenger/i) == "micromessenger") {
-        return true;
+    is_weixin () {
+      var ua = navigator.userAgent.toLowerCase()
+      if (ua.match(/MicroMessenger/i) === 'micromessenger') {
+        return true
       } else {
-        return false;
+        return false
       }
     }
   }
-};
+}
 </script>
 <style lang='scss' scoped>
 .box {
@@ -43,28 +43,3 @@ background: #fff;
   }
 }
 </style>
-
-</**
-kehuduan(){
-      var u = navigator.userAgent;
-      var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-      var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-      this.operationSys = 'android'
-      if(isiOS){
-          this.operationSys = 'ios'
-      }else if(isAndroid){
-          this.operationSys = 'android'
-      }
-
-      console.log(isAndroid)
-      console.log(isiOS)
-    },
-    is_weixin() {
-      var ua = navigator.userAgent.toLowerCase();
-      if (ua.match(/MicroMessenger/i) == "micromessenger") {
-        return true;
-      } else {
-        return false;
-      }
-    },
- */>
