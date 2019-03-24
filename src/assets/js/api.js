@@ -3,7 +3,7 @@ import md5 from 'js-md5'
 import qs from 'qs'
 import { mobileSyatem } from './utils.js'
 
-const baseURL = 'http://47.104.189.49:9092'
+const baseURL = 'http://47.92.172.184:9092'
 
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
