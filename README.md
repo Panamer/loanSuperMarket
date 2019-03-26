@@ -25,6 +25,4 @@ npm run test
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-http://47.92.172.184:9092
+vue路由设置为hash模式的时候，window.location.search是取不到值的。要用window.location.hash
