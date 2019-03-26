@@ -58,7 +58,7 @@ const API = {
     Object.assign(options, {
       sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
     })
-    return axios.post('/user/login', qs.stringify(options))
+    return axios.post('/user/channel/login', qs.stringify(options))
   },
   // 退出接口
   logout () {

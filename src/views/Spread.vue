@@ -35,6 +35,7 @@
 <script>
 import { Toast } from 'mint-ui'
 import VMessageCode from '@/components/MessageCode.vue'
+import * as utils from '@/assets/js/utils.js'
 
 export default {
   name: 'login',
@@ -112,6 +113,7 @@ export default {
       }
       this.loading = true
       this.$http.loginForSpread({
+        channel: utils.getQueryString('channel') || 'H5',
         code: this.messageCode,
         phone: this.mobile
       }).then((res) => {
