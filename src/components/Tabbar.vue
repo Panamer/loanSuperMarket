@@ -52,7 +52,9 @@ export default {
     height: 22px;
   }
   .active {
-    color: #2f89ff;
+    // color: #2f89ff;
+    color: #e21a1ac4;
+    font-weight:bold;
   }
 }
 </style>

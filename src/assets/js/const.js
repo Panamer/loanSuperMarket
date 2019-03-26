@@ -3,8 +3,8 @@ const CONST = {
     {
       name: '下款牛市',
       path: '/loanMarket',
-      in: require('@/assets/images/finance-in.png'),
-      out: require('@/assets/images/finance-out.png')
+      in: require('@/assets/images/home-in.png'),
+      out: require('@/assets/images/home-out.png')
     },
     {
       name: '我的',

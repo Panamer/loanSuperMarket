@@ -1,6 +1,5 @@
 <template>
     <div class="login-wrapper">
-      <img class="photo" src="../assets/images/touxiang.png" alt="">
       <form class="form-wrapper" @submit.prevent="submit">
         <div class="form-item">
           <div>
@@ -27,16 +26,16 @@
           </div>
         </div>
         <div class="form-btn-wrapper">
-          <mt-spinner type="fading-circle" color="#ffffff" :size="20" v-if="loading"></mt-spinner>
-          <button class="form-btn" type="submit" :disabled="submitDisabled">{{ loading ? '登录中' : '立即登录' }}</button>
+          <button class="form-btn" type="submit" :disabled="submitDisabled">注册领现金</button>
         </div>
       </form>
     </div>
 </template>
 
 <script>
-import { Toast, Spinner } from 'mint-ui'
+import { Toast } from 'mint-ui'
 import VMessageCode from '@/components/MessageCode.vue'
+import * as utils from '@/assets/js/utils.js'
 
 export default {
   name: 'login',
@@ -59,8 +58,7 @@ export default {
     }
   },
   components: {
-    VMessageCode,
-    'mt-spinner': Spinner
+    VMessageCode
   },
   computed: {
     submitDisabled () {
@@ -114,7 +112,8 @@ export default {
         return
       }
       this.loading = true
-      this.$http.login({
+      this.$http.loginForSpread({
+        channel: utils.getQueryString('channel') || 'H5',
         code: this.messageCode,
         phone: this.mobile
       }).then((res) => {
@@ -123,7 +122,7 @@ export default {
           localStorage.setItem('token', res.data.response.cont.token)
           localStorage.setItem('phone', res.data.response.cont.phone)
           this.$router.push({
-            name: 'loanMarket'
+            name: 'download'
           })
         } else {
           Toast(res.data.msg)
@@ -137,6 +136,13 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/css/login.scss";
 
+.login-wrapper {
+  background-image: url(../assets/images/tuiguang-bg.jpg);
+  background-size: 100% 100%;
+}
+.login-wrapper .form-wrapper{
+  margin-top: 4.1rem;
+}
 .img-code {
   position: absolute;
   right: 0;
@@ -163,10 +169,11 @@ export default {
   }
 }
 .form-btn-wrapper {
-  margin-top: 65px;
+  margin-top: 35px;
   .form-btn {
     letter-spacing: 10px;
-    background-color: #ffffff;
+    background-color: #2b3297;
+    border-radius: 8px;
   }
 }
 </style>
