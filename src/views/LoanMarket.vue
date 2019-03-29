@@ -89,23 +89,12 @@ export default {
     // 跳转第三方(后期需加埋点) interfaceType applyUrl
     toThirdParty (v) {
       if (v.interfaceType === "0") {
-        this.$http.count();
-        if (localStorage.getItem('phone')) {
-          window.location.href = v.applyUrl
-        } else {
-          MessageBox({
-            message: '您还未登录，请先去登录？',
-            confirmButtonText: '去登录'
-          }).then(action => {
-            this.$router.push({
-              name: 'login'
-            })
-          })
-        }
-      } else if (v.interfaceType === "1"){
-        Toast("请勿重复申请")
+        this.$http.count({ channelId: v.id}).then((res) => {
+          if (res.data.code === 1) {
+              window.location.href = v.applyUrl
+          }
+        });
       }
-      
     },
     // 获取 banner 列表
     getLifeBannerList () {

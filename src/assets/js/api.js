@@ -1,6 +1,7 @@
 import axios from 'axios'
 import md5 from 'js-md5'
 import qs from 'qs'
+import router from '../../router'
 import { mobileSyatem } from './utils.js'
 
 const baseURL = 'http://47.92.172.184:9092'
@@ -18,7 +19,18 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(response => {
-  return response
+  if (response.data.code === -1003) {
+    MessageBox({
+      message: '您还未登录，请先去登录？',
+      confirmButtonText: '去登录'
+    }).then(action => {
+      router.push({
+        name: 'login'
+      })
+    })
+  } else {
+    return response
+  }
 }, error => {
   console.log(error)
 })
