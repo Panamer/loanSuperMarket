@@ -65,6 +65,12 @@ const API = {
     axios.defaults.headers.token = localStorage.getItem('token')
     const data = 'sign=' + md5('&key=123456').toUpperCase()
     return axios.post('/user/logout', data)
+  },
+  // 统计接口
+  count () {
+    axios.defaults.headers.token = localStorage.getItem('token')
+    const data = 'sign=' + md5('&key=123456').toUpperCase()
+    return axios.post('/market/addOrder', data)
   }
 }
 export default API

@@ -27,7 +27,11 @@ img.qihangdai_xiazai_img1{
     margin: 0 auto;
     color: #FFFFFF;
     font-size: .1rem;max-width:158px;padding-left:10%
-  }
+}
+.qihangdai_xiazai_p2 span{
+  background: url(../images/xiazai2.png) no-repeat left center;
+  background-size: .13rem .15rem;
+}
 .qihangdai_xiazai_p3{
   height:2rem;line-height:.2rem;
   text-align:center;color:#fff;

@@ -32,7 +32,7 @@
                                 <p>{{v.creditTerm}}</p>
                             </li>
                             <li>
-                                <a class="supermarket-btn" @click="toThirdParty(v.applyUrl)">申请</a>
+                                <a class="supermarket-btn" @click="toThirdParty(v)">申请</a>
                             </li>
                         </ul>
                         <p class="desc">{{v.recommend}}</p>
@@ -86,20 +86,26 @@ export default {
       this.getLifeBannerList()
       this.getCreditMarketList()
     },
-    // 跳转第三方(后期需加埋点)
-    toThirdParty (url) {
-      if (localStorage.getItem('phone')) {
-        window.location.href = url
-      } else {
-        MessageBox({
-          message: '您还未登录，请先去登录？',
-          confirmButtonText: '去登录'
-        }).then(action => {
-          this.$router.push({
-            name: 'login'
+    // 跳转第三方(后期需加埋点) interfaceType applyUrl
+    toThirdParty (v) {
+      if (v.interfaceType === "0") {
+        this.$http.count();
+        if (localStorage.getItem('phone')) {
+          window.location.href = v.applyUrl
+        } else {
+          MessageBox({
+            message: '您还未登录，请先去登录？',
+            confirmButtonText: '去登录'
+          }).then(action => {
+            this.$router.push({
+              name: 'login'
+            })
           })
-        })
+        }
+      } else if (v.interfaceType === "1"){
+        Toast("请勿重复申请")
       }
+      
     },
     // 获取 banner 列表
     getLifeBannerList () {
