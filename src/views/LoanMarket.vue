@@ -61,7 +61,7 @@
 // @ is an alias to /src
 import VLayout from '@/components/Layout.vue'
 import '@/assets/css/about.css'
-import { Toast, Swipe, SwipeItem, MessageBox } from 'mint-ui'
+import { Toast, Swipe, SwipeItem } from 'mint-ui'
 
 export default {
   name: 'loanMarket',
@@ -88,12 +88,12 @@ export default {
     },
     // 跳转第三方(后期需加埋点) interfaceType applyUrl
     toThirdParty (v) {
-      if (v.interfaceType === "0") {
-        this.$http.count({ channelId: v.id}).then((res) => {
-          if (res.data.code === 1) {
-              window.location.href = v.applyUrl
+      if (v.interfaceType === '0') {
+        this.$http.count({ channelId: v.id }).then((res) => {
+          if (res && res.data.code === 1) {
+            window.location.href = v.applyUrl
           }
-        });
+        })
       }
     },
     // 获取 banner 列表

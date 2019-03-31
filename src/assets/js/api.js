@@ -3,6 +3,7 @@ import md5 from 'js-md5'
 import qs from 'qs'
 import router from '../../router'
 import { mobileSyatem } from './utils.js'
+import { MessageBox } from 'mint-ui'
 
 const baseURL = 'http://47.92.172.184:9092'
 
@@ -79,10 +80,12 @@ const API = {
     return axios.post('/user/logout', data)
   },
   // 统计接口
-  count () {
+  count (options = {}) {
     axios.defaults.headers.token = localStorage.getItem('token')
-    const data = 'sign=' + md5('&key=123456').toUpperCase()
-    return axios.post('/market/addOrder', data)
+    Object.assign(options, {
+      sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
+    })
+    return axios.post('/market/addOrder', qs.stringify(options))
   }
 }
 export default API
