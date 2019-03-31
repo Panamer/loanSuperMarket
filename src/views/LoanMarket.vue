@@ -99,10 +99,10 @@ export default {
     // 获取 banner 列表
     getLifeBannerList () {
       this.bannerList = [
-        { imagePath: 'http://dummyimage.com/200x100/FF6600' },
-        { imagePath: 'http://dummyimage.com/200x100/50B347/FFF&text=Mock.js' },
-        { imagePath: 'http://dummyimage.com/200x100/4A7BF7&text=Hello' },
-        { imagePath: 'http://dummyimage.com/200x100/894FC4/FFF.png&text=!' }]
+        // { imagePath: 'http://dummyimage.com/200x100/FF6600' },
+        { imagePath: 'http://img.1ppt.com/uploads/allimg/1902/1_190218135629_1.jpg' }
+        // { imagePath: 'http://dummyimage.com/200x100/894FC4/FFF.png&text=!' }
+      ]
     },
     // 获取贷款超市列表
     getCreditMarketList () {
