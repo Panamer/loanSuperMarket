@@ -61,8 +61,8 @@
 // @ is an alias to /src
 import VLayout from '@/components/Layout.vue'
 import '@/assets/css/about.css'
-import { Toast, Swipe, SwipeItem } from 'mint-ui'
-import { connectWebViewJavascriptBridge } from '@/assets/js/utils';
+import { Toast, Swipe, SwipeItem, MessageBox } from 'mint-ui'
+import { connectWebViewJavascriptBridge } from '@/assets/js/utils'
 
 export default {
   name: 'loanMarket',
@@ -89,29 +89,37 @@ export default {
     },
     // 跳转第三方(后期需加埋点) interfaceType applyUrl
     async toThirdParty (v) {
-      const authen = await this.$http.authentication();
+      const authen = await this.$http.authentication()
+      console.log(authen)
       if (authen && authen.data.code === 1) {
         this.authenOrapply(v, authen)
-      } else {
-        Toast(res.data.msg)
       }
     },
     // 点击申请的逻辑
-    async authenOrapply(v, authen) {
-      if (authen.data.response === 2005) {
+    async authenOrapply (v, authen) {
+      const authenticationState = authen.data.response.cont.authenticationState
+      if (authenticationState.identityState === 0 ||
+          authenticationState.lifeState === 0 ||
+          authenticationState.livingBodyState === 0 ||
+          authenticationState.operatorState === 0) {
         connectWebViewJavascriptBridge(JSBridge => {
-          JSBridge.callHandler('apply', {}, encData => {
-          });
-        });
-      } else if(未一键申请过) {
-        弹一键申请框
-      } else if(一键申请过) {
+          JSBridge.callHandler('apply', { H5Token: localStorage.getItem('token') }, encData => {
+          })
+        })
+      } else if (authenticationState.isFirstOrder === 'true') {
+        MessageBox({
+          message: '一键申请？',
+          confirmButtonText: '好的'
+        }).then(action => {
+          Toast('一键申请成功')
+        })
+      } else if (authenticationState.isFirstOrder === 'false') {
         if (v.interfaceType === '0') {
-          let order = await this.$http.count({ channelId: v.id });
+          let order = await this.$http.count({ channelId: v.id })
           if (order && order.data.code === 1) {
             window.location.href = v.applyUrl
           }
-        }else {
+        } else {
           Toast('申请成功')
         }
       }

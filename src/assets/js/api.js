@@ -6,7 +6,7 @@ import { mobileSyatem } from './utils.js'
 import { MessageBox } from 'mint-ui'
 
 // const baseURL = 'http://47.92.172.184:9092'
-const baseURL = 'loanmarketapi.yqhealth.vip'
+const baseURL = 'http://loanmarketapi.yqhealth.vip'
 
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
