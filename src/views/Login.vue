@@ -32,7 +32,7 @@
         </div>
         <div class="agreement">
           <span @click="agree">
-            <i :class="isAgree ? 'icon-correct-on' : 'icon-correct'"></i>
+            <span :class="isAgree ? 'icon-correct' : 'icon-correct-on'"></span>
             我已阅读并接受<a @click.stop="goAgreement">《服务协议》</a>
           </span>
         </div>
@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     submitDisabled () {
-      return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0
+      return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0 || !this.isAgree
     }
   },
   mounted () {
@@ -140,11 +140,6 @@ export default {
     /* 同意协议 */
     agree () {
       this.isAgree = !this.isAgree
-      if (!this.isAgree) {
-        this.submitDisabled = true
-      } else {
-        this.submitDisabled = false
-      }
     },
     goAgreement () {
       window.location.href = ''
@@ -188,22 +183,5 @@ export default {
     background-color: #ffffff;
   }
 }
-.agreement {
-  margin-top: 13px;
-  text-align: center;
-  color: #9fc4e9;
-  .icon-correct,
-  .icon-correct-on {
-    width: 13px;
-    height: 13px;
-    margin-top: -2px;
-    vertical-align: middle;
-    background: url("../assets/images/icon-radio-off.png") no-repeat center;
-    background-size: 100% 100%;
-  }
-  .icon-correct-on {
-    background: url("../assets/images/icon-radio-on.png") no-repeat center;
-    background-size: 100% 100%;
-  }
-}
+
 </style>

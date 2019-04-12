@@ -117,5 +117,28 @@
          transform: translate(-65%, -50%);
        }
      }
+     .agreement {
+      margin-top: 13px;
+      text-align: center;
+      color: #9fc4e9;
+      .icon-correct {
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        margin-top: -2px;
+        vertical-align: middle;
+        background: url("../assets/images/icon-checked.png") no-repeat center;
+        background-size: 100% 100%;
+      }
+      .icon-correct-on {
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        margin-top: -2px;
+        vertical-align: middle;
+        background: url("../assets/images/icon-check.png") no-repeat center;
+        background-size: 100% 100%;
+      }
+    }
    }
  }
