@@ -62,6 +62,7 @@
 import VLayout from '@/components/Layout.vue'
 import '@/assets/css/about.css'
 import { Toast, Swipe, SwipeItem } from 'mint-ui'
+import { connectWebViewJavascriptBridge } from '@/assets/js/utils';
 
 export default {
   name: 'loanMarket',
@@ -87,13 +88,32 @@ export default {
       this.getCreditMarketList()
     },
     // 跳转第三方(后期需加埋点) interfaceType applyUrl
-    toThirdParty (v) {
-      if (v.interfaceType === '0') {
-        this.$http.count({ channelId: v.id }).then((res) => {
-          if (res && res.data.code === 1) {
+    async toThirdParty (v) {
+      const authen = await this.$http.authentication();
+      if (authen && authen.data.code === 1) {
+        this.authenOrapply(v, authen)
+      } else {
+        Toast(res.data.msg)
+      }
+    },
+    // 点击申请的逻辑
+    async authenOrapply(v, authen) {
+      if (authen.data.response === 2005) {
+        connectWebViewJavascriptBridge(JSBridge => {
+          JSBridge.callHandler('apply', {}, encData => {
+          });
+        });
+      } else if(未一键申请过) {
+        弹一键申请框
+      } else if(一键申请过) {
+        if (v.interfaceType === '0') {
+          let order = await this.$http.count({ channelId: v.id });
+          if (order && order.data.code === 1) {
             window.location.href = v.applyUrl
           }
-        })
+        }else {
+          Toast('申请成功')
+        }
       }
     },
     // 获取 banner 列表

@@ -5,7 +5,8 @@ import router from '../../router'
 import { mobileSyatem } from './utils.js'
 import { MessageBox } from 'mint-ui'
 
-const baseURL = 'http://47.92.172.184:9092'
+// const baseURL = 'http://47.92.172.184:9092'
+const baseURL = 'loanmarketapi.yqhealth.vip'
 
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -86,6 +87,12 @@ const API = {
       sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
     })
     return axios.post('/market/addOrder', qs.stringify(options))
-  }
+  },
+  // 认证状态查询接口  
+  authentication () {
+    axios.defaults.headers.token = localStorage.getItem('token')
+    const data = 'sign=' + md5('&key=123456').toUpperCase()
+    return axios.post('/v1/authentication/userInfo', data)
+  },
 }
 export default API

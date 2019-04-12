@@ -24,3 +24,28 @@ export const getQueryString = (key) => {
         }
     }
 }
+
+/*
+ * 与原生交互的JSBridge方法库
+ */
+export function connectWebViewJavascriptBridge(callback) {
+    if (window.WebViewJavascriptBridge) {
+      return callback(window.WebViewJavascriptBridge);
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge);
+      }, false);
+    }
+    if (window.WVJBCallbacks) {
+      return window.WVJBCallbacks.push(callback);
+    }
+    window.WVJBCallbacks = [callback];
+    var WVJBIframe = document.createElement('iframe');
+    WVJBIframe.style.display = 'none';
+    WVJBIframe.src = 'gomescheme://__BRIDGE_LOADED__';
+    document.documentElement.appendChild(WVJBIframe);
+    setTimeout(function () {
+      document.documentElement.removeChild(WVJBIframe);
+    }, 0);
+    // callback();
+  }
