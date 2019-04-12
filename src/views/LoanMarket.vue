@@ -32,7 +32,7 @@
                                 <p>{{v.creditTerm}}</p>
                             </li>
                             <li>
-                                <a class="supermarket-btn" @click="toThirdParty(v.applyUrl)">申请</a>
+                                <a class="supermarket-btn" @click="toThirdParty(v)">申请</a>
                             </li>
                         </ul>
                         <p class="desc">{{v.recommend}}</p>
@@ -61,7 +61,7 @@
 // @ is an alias to /src
 import VLayout from '@/components/Layout.vue'
 import '@/assets/css/about.css'
-import { Toast, Swipe, SwipeItem, MessageBox } from 'mint-ui'
+import { Toast, Swipe, SwipeItem } from 'mint-ui'
 
 export default {
   name: 'loanMarket',
@@ -86,28 +86,23 @@ export default {
       this.getLifeBannerList()
       this.getCreditMarketList()
     },
-    // 跳转第三方(后期需加埋点)
-    toThirdParty (url) {
-      if (localStorage.getItem('phone')) {
-        window.location.href = url
-      } else {
-        MessageBox({
-          message: '您还未登录，请先去登录？',
-          confirmButtonText: '去登录'
-        }).then(action => {
-          this.$router.push({
-            name: 'login'
-          })
+    // 跳转第三方(后期需加埋点) interfaceType applyUrl
+    toThirdParty (v) {
+      if (v.interfaceType === '0') {
+        this.$http.count({ channelId: v.id }).then((res) => {
+          if (res && res.data.code === 1) {
+            window.location.href = v.applyUrl
+          }
         })
       }
     },
     // 获取 banner 列表
     getLifeBannerList () {
       this.bannerList = [
-        { imagePath: 'http://dummyimage.com/200x100/FF6600' },
-        { imagePath: 'http://dummyimage.com/200x100/50B347/FFF&text=Mock.js' },
-        { imagePath: 'http://dummyimage.com/200x100/4A7BF7&text=Hello' },
-        { imagePath: 'http://dummyimage.com/200x100/894FC4/FFF.png&text=!' }]
+        // { imagePath: 'http://dummyimage.com/200x100/FF6600' },
+        { imagePath: 'http://img.1ppt.com/uploads/allimg/1902/1_190218135629_1.jpg' }
+        // { imagePath: 'http://dummyimage.com/200x100/894FC4/FFF.png&text=!' }
+      ]
     },
     // 获取贷款超市列表
     getCreditMarketList () {
