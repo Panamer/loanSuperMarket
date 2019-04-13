@@ -25,6 +25,12 @@
             <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model.trim="messageCode">
           </div>
         </div>
+        <div class="agreement">
+          <span @click="agree">
+            <span :class="isAgree ? 'icon-correct' : 'icon-correct-on'"></span>
+            我已阅读并接受<a @click.stop="goAgreement">《服务协议》</a>
+          </span>
+        </div>
         <div class="form-btn-wrapper">
           <button class="form-btn" type="submit" :disabled="submitDisabled">注册领现金</button>
         </div>
@@ -54,7 +60,8 @@ export default {
       imgCode: '',
       captchakey: '',
       imgCodeSrc: '',
-      messageCode: ''
+      messageCode: '',
+      isAgree: true
     }
   },
   components: {
@@ -128,6 +135,18 @@ export default {
           Toast(res.data.msg)
         }
       })
+    },
+    /* 同意协议 */
+    agree () {
+      this.isAgree = !this.isAgree
+    },
+    goAgreement () {
+      this.$router.push({
+        name: 'FWagreement',
+        query: {
+          path: 'spread'
+        }
+      })
     }
   }
 }
@@ -175,5 +194,8 @@ export default {
     background-color: #2b3297;
     border-radius: 8px;
   }
+}
+.agreement{
+  // margin-bottom: 20px;
 }
 </style>

@@ -12,31 +12,31 @@ const router = new Router({
         name: 'loanMarket'
       }
     },
+    // 首页
     {
       path: '/loanMarket',
       name: 'loanMarket',
       component: resolve => require(['@/views/LoanMarket.vue'], resolve)
     },
+    // 登录页
     {
       path: '/login',
       name: 'login',
       component: resolve => require(['@/views/Login.vue'], resolve)
     },
-    {
-      path: '/loginOut',
-      name: 'loginOut',
-      component: resolve => require(['@/views/LoginOut.vue'], resolve)
-    },
+    // 我的tab
     {
       path: '/mine',
       name: 'mine',
       component: resolve => require(['@/views/Mine.vue'], resolve)
     },
+    // 推广页
     {
       path: '/spread',
       name: 'spread',
       component: resolve => require(['@/views/Spread.vue'], resolve)
     },
+    // 下载页
     {
       path: '/download',
       name: 'download',
