@@ -142,7 +142,12 @@ export default {
       this.isAgree = !this.isAgree
     },
     goAgreement () {
-      window.location.href = ''
+      this.$router.push({
+        name: 'FWagreement',
+        query: {
+          path: 'login'
+        }
+      })
     }
   }
 }

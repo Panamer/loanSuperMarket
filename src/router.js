@@ -41,6 +41,12 @@ const router = new Router({
       path: '/download',
       name: 'download',
       component: resolve => require(['@/views/Download.vue'], resolve)
+    },
+    // 服务协议
+    {
+      path: '/FWagreement',
+      name: 'FWagreement',
+      component: resolve => require(['@/views/fw-agreement.vue'], resolve)
     }
   ]
 })
