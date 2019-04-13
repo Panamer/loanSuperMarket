@@ -62,7 +62,7 @@
 import VLayout from '@/components/Layout.vue'
 import '@/assets/css/about.css'
 import { Toast, Swipe, SwipeItem, MessageBox } from 'mint-ui'
-import { connectWebViewJavascriptBridge } from '@/assets/js/utils'
+import * as utils from '@/assets/js/utils'
 
 export default {
   name: 'loanMarket',
@@ -79,6 +79,19 @@ export default {
   },
   mounted () {
     this.init()
+    utils.connectWebViewJavascriptBridge(bridge => {
+      console.log('ready')
+      bridge.callHandler('gome_backLogin', null, response => {
+        console.log('success')
+      })
+    })
+    // utils.connectWebViewJavascriptBridge(JSBridge => {
+    //   console.log('-----2---====')
+    //   JSBridge.callHandler('apply', {
+    //     H5Token: localStorage.getItem('token') }, encData => {
+    //     console.log('-----3--====')
+    //   })
+    // })
   },
   computed: {
   },
@@ -102,8 +115,9 @@ export default {
           authenticationState.lifeState === 0 ||
           authenticationState.livingBodyState === 0 ||
           authenticationState.operatorState === 0) {
-        connectWebViewJavascriptBridge(JSBridge => {
-          JSBridge.callHandler('apply', { H5Token: localStorage.getItem('token') }, encData => {
+        utils.connectWebViewJavascriptBridge(JSBridge => {
+          JSBridge.callHandler('apply', {
+            H5Token: localStorage.getItem('token') }, encData => {
           })
         })
       } else if (authenticationState.isFirstOrder === 'true') {
@@ -163,6 +177,7 @@ export default {
   -webkit-overflow-scrolling: touch;
   .mint-swipe {
     height: 122px;
+    margin-top: 0.1rem;
     width: (355rem/100);
     a {
       display: block;
@@ -176,7 +191,7 @@ export default {
   }
   .title-name{
     position: absolute;
-    top: 6px;
+    top: 0.16rem;
     width: 100%;
     text-align: center;
     font-size: 12px;

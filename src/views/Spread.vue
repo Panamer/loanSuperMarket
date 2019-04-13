@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     submitDisabled () {
-      return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0
+      return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0 || !this.isAgree
     }
   },
   mounted () {
@@ -194,8 +194,5 @@ export default {
     background-color: #2b3297;
     border-radius: 8px;
   }
-}
-.agreement{
-  // margin-bottom: 20px;
 }
 </style>

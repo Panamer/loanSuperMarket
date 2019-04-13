@@ -29,23 +29,29 @@ export const getQueryString = (key) => {
  * 与原生交互的JSBridge方法库
  */
 export function connectWebViewJavascriptBridge(callback) {
-    if (window.WebViewJavascriptBridge) {
-      return callback(window.WebViewJavascriptBridge);
-    } else {
-      document.addEventListener('WebViewJavascriptBridgeReady', function () {
-        callback(window.WebViewJavascriptBridge);
-      }, false);
-    }
-    if (window.WVJBCallbacks) {
-      return window.WVJBCallbacks.push(callback);
-    }
-    window.WVJBCallbacks = [callback];
-    var WVJBIframe = document.createElement('iframe');
-    WVJBIframe.style.display = 'none';
-    WVJBIframe.src = 'gomescheme://__BRIDGE_LOADED__';
-    document.documentElement.appendChild(WVJBIframe);
-    setTimeout(function () {
-      document.documentElement.removeChild(WVJBIframe);
-    }, 0);
-    // callback();
+  if (window.WebViewJavascriptBridge) {
+    console.log(1)
+    return callback(window.WebViewJavascriptBridge);
+  } else {
+    console.log(2)
+    document.addEventListener('WebViewJavascriptBridgeReady', function (res) {
+      console.log(5)
+      callback(window.WebViewJavascriptBridge);
+    }, false);
   }
+  if (window.WVJBCallbacks) {
+    console.log(3)
+    return window.WVJBCallbacks.push(callback);
+  }
+  console.log(4)
+  window.WVJBCallbacks = [callback];
+  var WVJBIframe = document.createElement('iframe');
+  WVJBIframe.style.display = 'none';
+  WVJBIframe.src = 'gomescheme://__BRIDGE_LOADED__';
+  // WVJBIframe.src = 'gomefinancescheme://__BRIDGE_LOADED__';
+  document.documentElement.appendChild(WVJBIframe);
+  setTimeout(function () {
+    document.documentElement.removeChild(WVJBIframe);
+  }, 0);
+  // callback();
+}
