@@ -96,23 +96,25 @@ export default {
     },
     // 点击申请的逻辑
     async authenOrapply (v, authen) {
+      console.log(authen.data.response.cont.isFirstOrder)
+      console.log('-------')
+      console.log(authen.data.response.cont.isFirstOrder === 'true')
       const authenticationState = authen.data.response.cont.authenticationState
       if (authenticationState.identityState === 0 ||
-          authenticationState.lifeState === 0 ||
           authenticationState.livingBodyState === 0 ||
           authenticationState.operatorState === 0) {
         utils.connectWebViewJavascriptBridge(JSBridge => {
           JSBridge.callHandler('apply', `${localStorage.getItem('token')}`, encData => {
           })
         })
-      } else if (authenticationState.isFirstOrder === 'true') { // 首次申请
+      } else if (authen.data.response.cont.isFirstOrder === 'true') { // 首次申请
         MessageBox({
           message: '一键申请最优质资金',
           confirmButtonText: '好的'
         }).then(action => {
           this.sendApplyMessage(v)
         })
-      } else if (authenticationState.isFirstOrder === 'false') { // 有过一键申请
+      } else if (authen.data.response.cont.isFirstOrder === 'false') { // 有过一键申请
         this.sendApplyMessage(v)
       }
     },

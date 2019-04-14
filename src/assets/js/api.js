@@ -5,13 +5,16 @@ import router from '../../router'
 import { mobileSyatem } from './utils.js'
 import { MessageBox } from 'mint-ui'
 
+// 测试
 // const baseURL = 'http://47.92.172.184:9092'
+// 生产
 const baseURL = 'http://loanmarketapi.yqhealth.vip'
 
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 
 axios.interceptors.request.use(config => {
+  console.log('----:' +localStorage.getItem('token'))
   Object.assign(config.headers, {
     deviceInfo: JSON.stringify({ channel: mobileSyatem() })
   })
