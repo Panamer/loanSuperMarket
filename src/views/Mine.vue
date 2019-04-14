@@ -12,7 +12,7 @@
 </template>
 <script>
 import VLayout from '@/components/Layout.vue'
-import { Toast, MessageBox } from 'mint-ui'
+import { MessageBox } from 'mint-ui'
 
 export default {
   name: 'loan',
@@ -26,9 +26,11 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     if (!localStorage.getItem('phone')) {
-      next({
-        name: 'login'
-      })
+      MessageBox.confirm('您还未登录，请先去登录？').then(action => {
+        next({
+          name: 'login'
+        })
+      }, cancle => {})
     } else {
       next()
     }
@@ -36,19 +38,19 @@ export default {
   methods: {
     loginOut () {
       MessageBox.confirm('确认退出 ').then(action => {
-        this.$http.logout().then(res => {
-          if (res.data.code === 1) {
-            Toast('退出成功')
-            localStorage.removeItem('token')
-            localStorage.removeItem('phone')
-            this.$router.push({
-              name: 'loanMarket'
-            })
-          } else {
-            Toast(res.data.msg)
-          }
+        localStorage.removeItem('token')
+        localStorage.removeItem('phone')
+        this.$router.push({
+          name: 'loanMarket'
         })
-      })
+        // this.$http.logout().then(res => {
+        //   if (res.data.code === 1) {
+        //     Toast('退出成功')
+        //   } else {
+        //     Toast(res.data.msg)
+        //   }
+        // })
+      }, cancle => {})
     }
   }
 }

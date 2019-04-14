@@ -79,19 +79,6 @@ export default {
   },
   mounted () {
     this.init()
-    utils.connectWebViewJavascriptBridge(bridge => {
-      console.log('ready')
-      bridge.callHandler('gome_backLogin', null, response => {
-        console.log('success')
-      })
-    })
-    // utils.connectWebViewJavascriptBridge(JSBridge => {
-    //   console.log('-----2---====')
-    //   JSBridge.callHandler('apply', {
-    //     H5Token: localStorage.getItem('token') }, encData => {
-    //     console.log('-----3--====')
-    //   })
-    // })
   },
   computed: {
   },
@@ -100,10 +87,9 @@ export default {
       this.getLifeBannerList()
       this.getCreditMarketList()
     },
-    // 跳转第三方(后期需加埋点) interfaceType applyUrl
+    // 跳转第三方(后期需加埋点)
     async toThirdParty (v) {
       const authen = await this.$http.authentication()
-      console.log(authen)
       if (authen && authen.data.code === 1) {
         this.authenOrapply(v, authen)
       }
@@ -116,26 +102,27 @@ export default {
           authenticationState.livingBodyState === 0 ||
           authenticationState.operatorState === 0) {
         utils.connectWebViewJavascriptBridge(JSBridge => {
-          JSBridge.callHandler('apply', {
-            H5Token: localStorage.getItem('token') }, encData => {
+          JSBridge.callHandler('apply', `${localStorage.getItem('token')}`, encData => {
           })
         })
-      } else if (authenticationState.isFirstOrder === 'true') {
+      } else if (authenticationState.isFirstOrder === 'true') { // 首次申请
         MessageBox({
-          message: '一键申请？',
+          message: '一键申请最优质资金',
           confirmButtonText: '好的'
         }).then(action => {
-          Toast('一键申请成功')
+          this.sendApplyMessage(v)
         })
-      } else if (authenticationState.isFirstOrder === 'false') {
-        if (v.interfaceType === '0') {
-          let order = await this.$http.count({ channelId: v.id })
-          if (order && order.data.code === 1) {
-            window.location.href = v.applyUrl
-          }
-        } else {
-          Toast('申请成功')
-        }
+      } else if (authenticationState.isFirstOrder === 'false') { // 有过一键申请
+        this.sendApplyMessage(v)
+      }
+    },
+    // 进件接口
+    async sendApplyMessage (v) {
+      let order = await this.$http.count({ channelId: v.id })
+      if (order && order.data.code === 1) {
+        window.location.href = v.applyUrl
+      } else {
+        Toast(order.data.msg)
       }
     },
     // 获取 banner 列表

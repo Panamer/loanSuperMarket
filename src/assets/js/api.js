@@ -22,14 +22,11 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(response => {
   if (response.data.code === -1003) {
-    MessageBox({
-      message: '您还未登录，请先去登录？',
-      confirmButtonText: '去登录'
-    }).then(action => {
+    MessageBox.confirm('您还未登录，请先去登录？').then(action => {
       router.push({
         name: 'login'
       })
-    })
+    }, cancle => {})
   } else {
     return response
   }
