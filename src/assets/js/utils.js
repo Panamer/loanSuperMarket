@@ -30,20 +30,15 @@ export const getQueryString = (key) => {
  */
 export function connectWebViewJavascriptBridge(callback) {
   if (window.WebViewJavascriptBridge) {
-    console.log(1)
     return callback(window.WebViewJavascriptBridge);
   } else {
-    console.log(2)
     document.addEventListener('WebViewJavascriptBridgeReady', function (res) {
-      console.log(5)
       callback(window.WebViewJavascriptBridge);
     }, false);
   }
   if (window.WVJBCallbacks) {
-    console.log(3)
     return window.WVJBCallbacks.push(callback);
   }
-  console.log(4)
   window.WVJBCallbacks = [callback];
   var WVJBIframe = document.createElement('iframe');
   WVJBIframe.style.display = 'none';
