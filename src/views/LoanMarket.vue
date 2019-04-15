@@ -107,7 +107,8 @@ export default {
       } else if (authen.data.response.cont.isFirstOrder === 'true') { // 首次申请
         MessageBox({
           message: '一键申请最优质资金',
-          confirmButtonText: '好的'
+          confirmButtonText: '好的',
+          closeOnClickModal: false
         }).then(action => {
           this.sendApplyMessage(v)
         })
