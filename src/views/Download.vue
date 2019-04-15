@@ -32,7 +32,7 @@ export default {
       // 判断用户使用手机型号
       if (iphone) {
         // Ios用户下载地址
-        window.location.href = 'http://47.104.189.49:8004/#/loanMarket'
+        window.location.href = 'http://loanmarket.yqhealth.vip/#/loanMarket'
       } else if (android) {
         var na = navigator.userAgent.toLowerCase()
         // 判断用户是否用微信打开
@@ -40,7 +40,7 @@ export default {
           this.isWeixin = true
         } else {
           // Android 用户下载地址
-          window.location.href = 'https://qihangdai.oss-cn-zhangjiakou.aliyuncs.com/qihangdai.v1.0.1.apk'
+          window.location.href = 'https://xingyundai.oss-cn-zhangjiakou.aliyuncs.com/loanmark/Android/loanmarket.apk'
         }
       }
     }

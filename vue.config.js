@@ -30,7 +30,7 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new VConsolePlugin({
-        enable: process.env.NODE_ENV === 'production'
+        enable: process.env.NODE_ENV === '暂时不用'
       })
     ]
   }
