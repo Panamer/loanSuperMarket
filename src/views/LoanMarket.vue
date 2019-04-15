@@ -122,7 +122,10 @@ export default {
     async sendApplyMessage (v) {
       let order = await this.$http.count({ channelId: v.id })
       if (order && order.data.code === 1) {
-        window.location.href = v.applyUrl
+        Toast('申请成功')
+        setTimeout(() => {
+          window.location.href = v.applyUrl
+        }, 1000);
       } else {
         Toast(order.data.msg)
       }
