@@ -96,9 +96,6 @@ export default {
     },
     // 点击申请的逻辑
     async authenOrapply (v, authen) {
-      console.log(authen.data.response.cont.isFirstOrder)
-      console.log('-------')
-      console.log(authen.data.response.cont.isFirstOrder === 'true')
       const authenticationState = authen.data.response.cont.authenticationState
       if (authenticationState.identityState === 0 ||
           authenticationState.livingBodyState === 0 ||
