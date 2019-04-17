@@ -16,7 +16,7 @@ const router = new Router({
     {
       path: '/loanMarket',
       name: 'loanMarket',
-      component: resolve => require(['@/views/authentication.vue'], resolve)
+      component: resolve => require(['@/views/LoanMarket.vue'], resolve)
     },
     // 登录页
     {
@@ -41,6 +41,12 @@ const router = new Router({
       path: '/download',
       name: 'download',
       component: resolve => require(['@/views/Download.vue'], resolve)
+    },
+    // 认证信息页
+    {
+      path: '/authentication',
+      name: 'authentication',
+      component: resolve => require(['@/views/authentication.vue'], resolve)
     },
     // 服务协议
     {

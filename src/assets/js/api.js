@@ -6,7 +6,7 @@ import { mobileSyatem } from './utils.js'
 import { MessageBox } from 'mint-ui'
 
 // 测试
-// const baseURL = 'http://47.92.172.184:9092'
+// const baseURL = 'http://47.92.172.184:9092/api'
 // 生产
 const baseURL = 'http://loanmarketapi.yqhealth.vip'
 
@@ -88,7 +88,7 @@ const API = {
     })
     return axios.post('/market/addOrder', qs.stringify(options))
   },
-  // 认证状态查询接口  
+  // 认证状态查询接口
   authentication () {
     axios.defaults.headers.token = localStorage.getItem('token')
     const data = 'sign=' + md5('&key=123456').toUpperCase()

@@ -1,4 +1,5 @@
 const CONST = {
+  host: 'http://47.104.189.49:8008',
   menus: [
     {
       name: '下款牛市',

@@ -89,10 +89,13 @@ export default {
     },
     // 跳转第三方(后期需加埋点)
     async toThirdParty (v) {
-      const authen = await this.$http.authentication()
-      if (authen && authen.data.code === 1) {
-        this.authenOrapply(v, authen)
-      }
+      this.$router.push({
+        name: 'authentication'
+      })
+      // const authen = await this.$http.authentication()
+      // if (authen && authen.data.code === 1) {
+      //   this.authenOrapply(v, authen)
+      // }
     },
     // 点击申请的逻辑
     async authenOrapply (v, authen) {
@@ -123,7 +126,7 @@ export default {
         Toast('申请成功')
         setTimeout(() => {
           window.location.href = v.applyUrl
-        }, 1000);
+        }, 1000)
       } else {
         Toast(order.data.msg)
       }
