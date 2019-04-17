@@ -16,7 +16,7 @@ const router = new Router({
     {
       path: '/loanMarket',
       name: 'loanMarket',
-      component: resolve => require(['@/views/LoanMarket.vue'], resolve)
+      component: resolve => require(['@/views/authentication.vue'], resolve)
     },
     // 登录页
     {
