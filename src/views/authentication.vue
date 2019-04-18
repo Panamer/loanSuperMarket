@@ -24,13 +24,13 @@
       <li>
         <label>真实姓名</label>
         <span>
-          <input type="text" v-model="realName" placeholder="请输入真实姓名" style="width: 1.5rem;text-align: right;">
+          <input type="text" v-model="realName" placeholder="真实姓名" style="width: 1.5rem;text-align: right;">
         </span>
       </li>
       <li>
         <label>身份证号</label>
         <span>
-          <input type="text" v-model="identitify" placeholder="请输入身份证号" style="width: 1.5rem;text-align: right;">
+          <input type="text" v-model="identitify" placeholder="身份证号" style="width: 1.5rem;text-align: right;">
         </span>
       </li>
       <li>

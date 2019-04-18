@@ -96,7 +96,7 @@ const API = {
   },
   // 身份证上传
   uploadIdentiify (formData) {
-    return axios.post('/ocr/idcard', formData)
+    return axios.post(Const.host + '/ocr/idcard', formData)
   },
   // 获取运营商授权链接
   appAuthUrl () {
@@ -108,7 +108,7 @@ const API = {
   h5Identity (options = {}) {
     axios.defaults.headers.token = localStorage.getItem('token')
     Object.assign(options, {
-      sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
+      sign: '67d44dda-b29f-48a4-9830-67121bc656r5'
     })
     return axios.post('/v1/authentication/h5Identity', qs.stringify(options))
   },
@@ -116,7 +116,7 @@ const API = {
   h5facade (options = {}) {
     axios.defaults.headers.token = localStorage.getItem('token')
     Object.assign(options, {
-      sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
+      sign: '67d44dda-b29f-48a4-9830-67121bc656r5'
     })
     return axios.post('/h5facade', qs.stringify(options))
   }

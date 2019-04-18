@@ -1,6 +1,6 @@
 const CONST = {
   // 反向代理host
-  host: 'http://47.104.189.49:8008',
+  host: 'http://loanmarket.yqhealth.vip',
   // tab 菜单栏配置项
   menus: [
     {
