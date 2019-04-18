@@ -4,11 +4,11 @@ import qs from 'qs'
 import router from '../../router'
 import { mobileSyatem } from './utils.js'
 import { MessageBox } from 'mint-ui'
-
+import Const from  './const.js'
 // 测试
-// const baseURL = 'http://47.92.172.184:9092/api'
+const baseURL = '/api'
 // 生产
-const baseURL = 'http://loanmarketapi.yqhealth.vip'
+// const baseURL = 'http://loanmarketapi.yqhealth.vip'
 
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -94,5 +94,11 @@ const API = {
     const data = 'sign=' + md5('&key=123456').toUpperCase()
     return axios.post('/v1/authentication/userInfo', data)
   },
+  // 身份证上传
+  uploadIdentiify (formData) {
+    // return axios.post(`${Const.host}/ocr/idcard`, qs.stringify(options))
+    console.log(formData);
+    return axios.post('/ocr/idcard', formData)
+  }
 }
 export default API

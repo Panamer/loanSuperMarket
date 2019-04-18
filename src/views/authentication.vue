@@ -2,14 +2,18 @@
 <div class="authen-list">
   <section class="list">
     <ul>
-      <li @click="goInfor">
+      <li>
         <label>身份证正面</label>
-        <span v-if="identityFrontState === '0'">待认证 <i class="icon-arr"></i></span>
+        <span v-if="identityFrontState === '0'">待拍摄
+            <input class="photoBox" type="file" alt="待拍摄" accept="image/*" @change="frontSelected"> <i class="icon-arr"></i>
+        </span>
         <span v-else-if="identityFrontState === '1'" class="certified">已认证 <i class="icon-arr"></i></span>
       </li>
-      <li @click="goLink">
+      <li>
         <label>身份证背面</label>
-        <span v-if="identityBackState === '0'">待认证 <i class="icon-arr"></i></span>
+        <span v-if="identityBackState === '0'">待拍摄
+          <input class="photoBox" type="file" alt="待拍摄" accept="image/*" @change="backSelected"> <i class="icon-arr"></i>
+        </span>
         <span v-else-if="identityBackState === '1'" class="certified">已认证 <i class="icon-arr"></i></span>
       </li>
       <li @click="goliveness">
@@ -20,19 +24,19 @@
       <li>
         <label>真实姓名</label>
         <span>
-          <input type="text" name="" value="" style="width: 1.5rem;text-align: right;">
+          <input type="text" v-model="realName" placeholder="请输入真实姓名" style="width: 1.5rem;text-align: right;">
         </span>
       </li>
       <li>
         <label>身份证号</label>
         <span>
-          <input type="text" name="" value="" style="width: 1.5rem;text-align: right;">
+          <input type="text" v-model="identitify" placeholder="请输入身份证号" style="width: 1.5rem;text-align: right;">
         </span>
       </li>
       <li>
         <label>芝麻分</label>
         <span>
-            <input type="text" name="" value="" style="width: 1.5rem;text-align: right;">
+            <input type="text" v-model="sesame" placeholder="请输入芝麻分" style="width: 1.5rem;text-align: right;">
         </span>
       </li>
       <li>
@@ -54,6 +58,9 @@ export default {
       identityFrontState: '0',
       identityBackState: '0',
       livebodyState: '0',
+      realName: '',
+      identitify: '',
+      sesame: '',
       authNum: 0 // 已认证项数
     }
   },
@@ -82,11 +89,35 @@ export default {
       }
       return num
     },
-    // 个人信息跳转
-    goInfor () {
+    // 拍摄身份证正反面
+    frontSelected(e) {
+      const formData = new FormData();
+      formData.append('file', e.target.files[0]);
+      e.target.value = '';
+      this.$http.uploadIdentiify(formData).then(res => {
+        console.log(res);
+        if (res && res.status === 200 && res.data.info.name && res.data.info.number) {
+          res.data.side === 'front' ? this.identityFrontState = '1' : res.data.side === 'back' ? this.identityBackState = '1' : false
+          this.realName = res.data.info.name
+          this.identitify = res.data.info.number
+        } else {
+          Toast('请重新拍摄')
+        }
+      })
     },
-    // 紧急联系人跳转
-    goLink () {
+    // 拍摄身份证正反面
+    backSelected (e) {
+      const formData = new FormData();
+      formData.append('file', e.target.files[0]);
+      e.target.value = '';
+      this.$http.uploadIdentiify(formData).then(res => {
+        console.log(res);
+        if (res && res.status === 200) {
+          res.data.side === 'back' ? this.identityBackState = '1' : false
+        } else {
+          Toast('请重新拍摄')
+        }
+      })
     },
     // 活体认证
     goliveness () {
@@ -185,5 +216,12 @@ export default {
     color: #fff;
     background: #3E93FF;
     border: 1px solid #3E93FF;
+}
+.photoBox{
+    position: absolute;
+    right: 0;
+    background: aliceblue;
+    opacity: 0;
+    line-height: 0.47rem;
 }
 </style>
