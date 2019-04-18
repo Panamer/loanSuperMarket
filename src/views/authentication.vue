@@ -88,7 +88,7 @@ export default {
         }
       }
     },
-    // 拍摄身份证正反面
+    // 拍摄身份证正面
     frontSelected(e) {
       const formData = new FormData();
       formData.append('file', e.target.files[0]);
@@ -99,12 +99,20 @@ export default {
           res.data.side === 'front' ? this.identityFrontState = '1' : res.data.side === 'back' ? this.identityBackState = '1' : false
           this.realName = res.data.info.name
           this.identitify = res.data.info.number
+          this.$http.uploadIdentiify({
+            name: res.data.info.name,
+            identity: res.data.info.number,
+            identityImg: res.data.image_id,
+            address: res.data.info.address,
+            sex: res.data.info.sex,
+            identityImgType: 1
+          }).then(res => {})
         } else {
           Toast('请重新拍摄')
         }
       })
     },
-    // 拍摄身份证正反面
+    // 拍摄身份证反面
     backSelected (e) {
       const formData = new FormData();
       formData.append('file', e.target.files[0]);
@@ -113,6 +121,11 @@ export default {
         console.log(res);
         if (res && res.status === 200) {
           res.data.side === 'back' ? this.identityBackState = '1' : false
+          this.$http.uploadIdentiify({
+            timeLimit: res.data.info.timelimit,
+            identityImg: res.data.image_id,
+            identityImgType: 2
+          }).then(res => {})
         } else {
           Toast('请重新拍摄')
         }
@@ -157,6 +170,9 @@ export default {
           console.log(callbackData.passed)
           if (callbackData.passed) {
             that.livebodyState = '1'
+            this.$http.h5facade({
+              imageBest: callbackData.feature_image_id
+            }).then(res => {})
           }
         },
         // 活体检测发生错误后的回调函数

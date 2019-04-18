@@ -103,6 +103,22 @@ const API = {
     axios.defaults.headers.token = localStorage.getItem('token')
     const data = 'sign=' + md5('&key=123456').toUpperCase()
     return axios.post('/h5/auth/appAuthUrl', data)
+  },
+  // 上传身份证信息
+  h5Identity (options = {}) {
+    axios.defaults.headers.token = localStorage.getItem('token')
+    Object.assign(options, {
+      sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
+    })
+    return axios.post('/v1/authentication/h5Identity', qs.stringify(options))
+  },
+  // 上传活体认证照片
+  h5facade (options = {}) {
+    axios.defaults.headers.token = localStorage.getItem('token')
+    Object.assign(options, {
+      sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
+    })
+    return axios.post('/h5facade', qs.stringify(options))
   }
 }
 export default API
