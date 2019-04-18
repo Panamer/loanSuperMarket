@@ -89,24 +89,27 @@ export default {
     },
     // 跳转第三方(后期需加埋点)
     async toThirdParty (v) {
-      this.$router.push({
-        name: 'authentication'
-      })
-      // const authen = await this.$http.authentication()
-      // if (authen && authen.data.code === 1) {
-      //   this.authenOrapply(v, authen)
-      // }
+      const authen = await this.$http.authentication()
+      if (authen && authen.data.code === 1) {
+        this.authenOrapply(v, authen)
+      }
     },
     // 点击申请的逻辑
     async authenOrapply (v, authen) {
       const authenticationState = authen.data.response.cont.authenticationState
       if (authenticationState.identityState === 0 ||
           authenticationState.livingBodyState === 0 ||
-          authenticationState.operatorState === 0) {
-        utils.connectWebViewJavascriptBridge(JSBridge => {
-          JSBridge.callHandler('apply', `${localStorage.getItem('token')}`, encData => {
+          authenticationState.operatorState === 0)
+      {   // 区分当前环境是安卓还是浏览器
+        if (utils.mobileSyatem === 'Android') {
+          utils.connectWebViewJavascriptBridge(JSBridge => {
+              JSBridge.callHandler('apply', `${localStorage.getItem('token')}`, encData => {})
           })
-        })
+        } else {
+          this.$router.push({
+            name: 'authentication'
+          })
+        }
       } else if (authen.data.response.cont.isFirstOrder === 'true') { // 首次申请
         MessageBox({
           message: '一键申请最优质资金',

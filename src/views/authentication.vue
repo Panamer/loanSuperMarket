@@ -123,9 +123,14 @@ export default {
       this.LivenessSDK()
     },
     nextStep() {
-      if (this.identityFrontState === '0' && this.identityBackState === '0' && this.livebodyState === '0') {
-        this.$http.appAuthUrl().then(res => {
-          console.log(res);
+      if (this.identityFrontState === '1' && this.identityBackState === '1' && this.livebodyState === '1') {
+        this.$http.appAuthUrl().then(result => {
+          console.log(result);
+          if (result && result.data.code === 1) {
+            window.location.href = result.data.reponse.count
+          } else {
+            Toast(result.data.msg)
+          }
         })
       }else {
         Toast('请完善信息！')
