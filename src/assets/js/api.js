@@ -6,9 +6,9 @@ import { mobileSyatem } from './utils.js'
 import { MessageBox } from 'mint-ui'
 import Const from  './const.js'
 // 测试
-const baseURL = '/api'
+// const baseURL = '/api'
 // 生产
-// const baseURL = 'http://loanmarketapi.yqhealth.vip'
+const baseURL = 'http://loanmarketapi.yqhealth.vip'
 
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -96,9 +96,13 @@ const API = {
   },
   // 身份证上传
   uploadIdentiify (formData) {
-    // return axios.post(`${Const.host}/ocr/idcard`, qs.stringify(options))
-    console.log(formData);
     return axios.post('/ocr/idcard', formData)
+  },
+  // 获取运营商授权链接
+  appAuthUrl () {
+    axios.defaults.headers.token = localStorage.getItem('token')
+    const data = 'sign=' + md5('&key=123456').toUpperCase()
+    return axios.post('/h5/auth/appAuthUrl', data)
   }
 }
 export default API

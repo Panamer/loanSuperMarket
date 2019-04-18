@@ -70,24 +70,23 @@ export default {
   computed: {
   },
   watch: {
-    '$route': function (to, from) {
-      this.$router.go(0)
-    }
+    // '$route': function (to, from) {
+    //   this.$router.go(0)
+    // }
   },
   methods: {
     // 刚进页面-获取认证状态
-    getAuthenList () {
-    },
-    // 已认证项数
-    getAuthNum () {
-      let arr = ['infor', 'contact', 'mobile', 'bank']
-      let num = 0
-      for (let v of arr) {
-        if (this[v + 'State'] === '1' || this[v + 'State'] === 'Y') {
-          num++
+    async getAuthenList () {
+      const authen = await this.$http.authentication()
+      if (authen && authen.data.code === 1) {
+        const authenticationState = authen.data.response.cont.authenticationState
+        if (authenticationState.identityState === 1) {
+          this.identityFrontState = '1'
+          this.identityBackState = '1'
+        } else if(authenticationState.livingBodyState === 1){
+          this.livebodyState = '1'
         }
       }
-      return num
     },
     // 拍摄身份证正反面
     frontSelected(e) {
@@ -124,7 +123,13 @@ export default {
       this.LivenessSDK()
     },
     nextStep() {
-
+      if (this.identityFrontState === '0' && this.identityBackState === '0' && this.livebodyState === '0') {
+        this.$http.appAuthUrl().then(res => {
+          console.log(res);
+        })
+      }else {
+        Toast('请完善信息！')
+      }
     },
     LivenessSDK () {
       // 预定义三个动作，单次活体检测只能选取其中一个动作进行。
