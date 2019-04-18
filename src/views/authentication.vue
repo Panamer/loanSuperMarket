@@ -99,7 +99,7 @@ export default {
           res.data.side === 'front' ? this.identityFrontState = '1' : res.data.side === 'back' ? this.identityBackState = '1' : false
           this.realName = res.data.info.name
           this.identitify = res.data.info.number
-          this.$http.uploadIdentiify({
+          this.$http.h5Identity({
             name: res.data.info.name,
             identity: res.data.info.number,
             identityImg: res.data.image_id,
@@ -121,7 +121,7 @@ export default {
         console.log(res);
         if (res && res.status === 200) {
           res.data.side === 'back' ? this.identityBackState = '1' : false
-          this.$http.uploadIdentiify({
+          this.$http.h5Identity({
             timeLimit: res.data.info.timelimit,
             identityImg: res.data.image_id,
             identityImgType: 2
