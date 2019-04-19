@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { Toast } from 'mint-ui'
+import { Toast, MessageBox } from 'mint-ui'
 import AOU from '@/assets/js/const'
 
 export default {
@@ -133,7 +133,13 @@ export default {
     },
     // 活体认证
     goliveness () {
-      this.LivenessSDK()
+      MessageBox({
+        message: '录制时请先切换至前置摄像头',
+        confirmButtonText: '好的',
+        closeOnClickModal: false
+      }).then(action => {
+        this.LivenessSDK()
+      })
     },
     nextStep() {
       if (this.identityFrontState === '1' && this.identityBackState === '1' && this.livebodyState === '1') {
