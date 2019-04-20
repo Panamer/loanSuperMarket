@@ -44,7 +44,6 @@ export default {
     }
   },
   created () {
-    console.log(this.$route.query.path)
   },
   components: {
     'mt-header': Header,

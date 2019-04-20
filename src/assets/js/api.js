@@ -14,14 +14,11 @@ axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 
 axios.interceptors.request.use(config => {
-  console.log('----:' +localStorage.getItem('token'))
   Object.assign(config.headers, {
     deviceInfo: JSON.stringify({ channel: mobileSyatem() })
   })
   return config
-}, error => {
-  console.log(error)
-})
+}, error => {})
 
 axios.interceptors.response.use(response => {
   if (response.data.code === -1003) {
@@ -33,9 +30,7 @@ axios.interceptors.response.use(response => {
   } else {
     return response
   }
-}, error => {
-  console.log(error)
-})
+}, error => {})
 
 const API = {
   baseURL,
@@ -118,7 +113,15 @@ const API = {
     Object.assign(options, {
       sign: '67d44dda-b29f-48a4-9830-67121bc656r5'
     })
-    return axios.post('/h5facade', qs.stringify(options))
+    return axios.post('/v1/authentication/h5facade', qs.stringify(options))
+  },
+  // 上传芝麻分
+  zhima (options = {}) {
+    axios.defaults.headers.token = localStorage.getItem('token')
+    Object.assign(options, {
+      sign: '67d44dda-b29f-48a4-9830-67121bc656r5'
+    })
+    return axios.post('/v1/authentication/zhima', qs.stringify(options))
   }
 }
 export default API

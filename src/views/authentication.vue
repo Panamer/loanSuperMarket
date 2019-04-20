@@ -24,13 +24,13 @@
       <li>
         <label>真实姓名</label>
         <span>
-          <input type="text" v-model="realName" placeholder="真实姓名" style="width: 1.5rem;text-align: right;">
+          {{realName}}
         </span>
       </li>
       <li>
         <label>身份证号</label>
         <span>
-          <input type="text" v-model="identitify" placeholder="身份证号" style="width: 1.5rem;text-align: right;">
+          {{identitify}}
         </span>
       </li>
       <li>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { Toast, MessageBox } from 'mint-ui'
+import { Toast, MessageBox, Indicator } from 'mint-ui'
 import AOU from '@/assets/js/const'
 
 export default {
@@ -83,6 +83,8 @@ export default {
         if (authenticationState.identityState === 1) {
           this.identityFrontState = '1'
           this.identityBackState = '1'
+          this.realName = authen.data.response.cont.identity.name
+          this.identitify = authen.data.response.cont.identity.identity
         } else if(authenticationState.livingBodyState === 1){
           this.livebodyState = '1'
         }
@@ -90,11 +92,12 @@ export default {
     },
     // 拍摄身份证正面
     frontSelected(e) {
+      Indicator.open();
       const formData = new FormData();
       formData.append('file', e.target.files[0]);
       e.target.value = '';
       this.$http.uploadIdentiify(formData).then(res => {
-        console.log(res);
+        Indicator.close();
         if (res && res.status === 200 && res.data.info.name && res.data.info.number) {
           res.data.side === 'front' ? this.identityFrontState = '1' : res.data.side === 'back' ? this.identityBackState = '1' : false
           this.realName = res.data.info.name
@@ -114,11 +117,12 @@ export default {
     },
     // 拍摄身份证反面
     backSelected (e) {
+      Indicator.open();
       const formData = new FormData();
       formData.append('file', e.target.files[0]);
       e.target.value = '';
       this.$http.uploadIdentiify(formData).then(res => {
-        console.log(res);
+        Indicator.close();
         if (res && res.status === 200) {
           res.data.side === 'back' ? this.identityBackState = '1' : false
           this.$http.h5Identity({
@@ -142,11 +146,20 @@ export default {
       })
     },
     nextStep() {
+      if (this.sesame && this.sesame > 350 && this.sesame < 950) {
+        this.goToYYS();
+      } else if(!this.sesame){
+        this.goToYYS();
+      } else {
+        return Toast('请输入正确的芝麻分！')
+      }
+    },
+    goToYYS() {
       if (this.identityFrontState === '1' && this.identityBackState === '1' && this.livebodyState === '1') {
+        this.$http.zhima({ zhimafen: this.sesame }).then(res => {})
         this.$http.appAuthUrl().then(result => {
-          console.log(result);
           if (result && result.data.code === 1) {
-            window.location.href = result.data.reponse.count
+            window.location.href = result.data.response.cont
           } else {
             Toast(result.data.msg)
           }
@@ -169,21 +182,18 @@ export default {
         host: AOU.host,
         // 在用户采集到视频之后，请求公有云接口之前执行
         beforeCheck: function (data) {
-          console.log('before data: ', data)
         },
         // 活体检测完成后的回调函数
         onChecked: function (callbackData) {
-          console.log(callbackData.passed)
           if (callbackData.passed) {
             that.livebodyState = '1'
-            this.$http.h5facade({
+            that.$http.h5facade({
               imageBest: callbackData.feature_image_id
             }).then(res => {})
           }
         },
         // 活体检测发生错误后的回调函数
         onError: function (error) {
-          console.log(error)
           Toast(error.message)
         },
         // 本次活体检测使用的动作
@@ -252,7 +262,6 @@ export default {
 .photoBox{
     position: absolute;
     right: 0;
-    background: aliceblue;
     opacity: 0;
     line-height: 0.47rem;
 }
