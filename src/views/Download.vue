@@ -3,10 +3,10 @@
     <div class="qihangdai_xiazai">
       <h3>下款牛市</h3>
       <p class="qihangdai_xiazai_p1" @click="downloadApp">
-          <span>安卓手机下载</span>
+          <span>安卓手机</span>
       </p>
       <p class="qihangdai_xiazai_p2" @click="downloadApp">
-          <span>苹果手机下载</span>
+          <span>苹果手机</span>
       </p>
     </div>
     <div class="main_zhezhaoceng" v-if="isWeixin">

@@ -126,9 +126,11 @@ export default {
       let order = await this.$http.count({ channelId: v.id })
       if (order && order.data.code === 1) {
         Toast('申请成功')
-        setTimeout(() => {
-          window.location.href = v.applyUrl
-        }, 1000)
+        if(v.applyUrl) {
+          setTimeout(() => {
+            window.location.href = v.applyUrl
+          }, 1000)
+        }
       } else {
         Toast(order.data.msg)
       }
