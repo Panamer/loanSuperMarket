@@ -186,10 +186,15 @@ export default {
         // 活体检测完成后的回调函数
         onChecked: function (callbackData) {
           if (callbackData.passed) {
-            that.livebodyState = '1'
             that.$http.h5facade({
               imageBest: callbackData.feature_image_id
-            }).then(res => {})
+            }).then(res => {
+              if (res && res.data.code === 1) {
+                that.livebodyState = '1'
+              }else {
+                Toast(res.data.msg)
+              }
+            })
           }
         },
         // 活体检测发生错误后的回调函数

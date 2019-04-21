@@ -100,7 +100,7 @@ export default {
       if (authenticationState.identityState === 0 ||
           authenticationState.livingBodyState === 0 ||
           authenticationState.operatorState === 0){   // 区分当前环境是安卓还是浏览器
-          if (utils.mobileSyatem === 'Android') {
+          if (utils.mobileSyatem() === 'Android') {
               utils.connectWebViewJavascriptBridge(JSBridge => {
                 JSBridge.callHandler('apply', `${localStorage.getItem('token')}`, encData => {})
           })
