@@ -46,7 +46,6 @@ import * as utils from '@/assets/js/utils.js'
 export default {
   name: 'login',
   /**
-   * @param {boolean} loading - loading状态
    * @param {number} mobile - 手机号
    * @param {string} imgCode - 图片验证码
    * @param {string} captchakey - 图片验证码接口返回的key
@@ -116,16 +115,11 @@ export default {
     },
     // 提交
     submit () {
-      if (this.loading) {
-        return
-      }
-      this.loading = true
       this.$http.loginForSpread({
         channel: utils.getQueryString('channel') || 'H5',
         code: this.messageCode,
         phone: this.mobile
       }).then((res) => {
-        this.loading = false
         if (res.data.code === 1) {
           localStorage.setItem('token', res.data.response.cont.token)
           localStorage.setItem('phone', res.data.response.cont.phone)
@@ -194,7 +188,7 @@ export default {
     letter-spacing: 10px;
     background-color: #2b3297;
     border-radius: 8px;
-    color: #de1313;
+    color: #de1313 !important;
   }
 }
 </style>
