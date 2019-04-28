@@ -8,7 +8,7 @@
             <input type="tel" maxlength="11" placeholder="请输入手机号" v-model.trim="mobile">
           </div>
         </div>
-        <div class="form-item">
+        <!-- <div class="form-item">
           <div>
             <i class="icon-img-code"></i>
             <div class="img-code" @click="getImgCode">
@@ -16,7 +16,7 @@
             </div>
             <input type="text" maxlength="4" placeholder="请输入图形验证码" v-model.trim="imgCode">
           </div>
-        </div>
+        </div> -->
         <div class="form-item">
           <div>
             <i class="icon-code"></i>
@@ -69,11 +69,12 @@ export default {
   },
   computed: {
     submitDisabled () {
-      return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0 || !this.isAgree
+      // return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0 || !this.isAgree
+      return this.mobile.length < 11 || this.messageCode.length === 0 || !this.isAgree
     }
   },
   mounted () {
-    this.getImgCode()
+    // this.getImgCode()  0428去掉
   },
   methods: {
     // 重新获取图片验证码
@@ -97,13 +98,13 @@ export default {
         Toast('请输入正确手机号')
         return
       }
-      if (!this.imgCode) {
-        Toast('请输入图形验证码')
-        return
-      }
-      this.$http.getMessage({
-        captcha: this.imgCode,
-        captchakey: this.captchakey,
+      // if (!this.imgCode) {
+      //   Toast('请输入图形验证码')
+      //   return
+      // }
+      this.$http.getMessageNew({
+        // captcha: this.imgCode,
+        // captchakey: this.captchakey,
         phone: this.mobile
       }).then((res) => {
         if (res.data.code === 1) {
@@ -193,6 +194,7 @@ export default {
     letter-spacing: 10px;
     background-color: #2b3297;
     border-radius: 8px;
+    color: #de1313;
   }
 }
 </style>

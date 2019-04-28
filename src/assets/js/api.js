@@ -54,6 +54,13 @@ const API = {
     })
     return axios.post('/user/send/sms', qs.stringify(options))
   },
+  // 获取短信验证码接口--新
+  getMessageNew (options = {}) {
+    Object.assign(options, {
+      sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
+    })
+    return axios.post('/user/channel/send/sms', qs.stringify(options))
+  },
   // 登录接口
   login (options = {}) {
     Object.assign(options, {
