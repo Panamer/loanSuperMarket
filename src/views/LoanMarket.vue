@@ -89,9 +89,13 @@ export default {
     },
     // 跳转第三方(后期需加埋点)
     async toThirdParty (v) {
-      const authen = await this.$http.authentication()
-      if (authen && authen.data.code === 1) {
-        this.authenOrapply(v, authen)
+      if(v.applyUrl) {
+        window.location.href = v.applyUrl
+      } else {
+        const authen = await this.$http.authentication()
+        if (authen && authen.data.code === 1) {
+          this.authenOrapply(v, authen)
+        }
       }
     },
     // 点击申请的逻辑
