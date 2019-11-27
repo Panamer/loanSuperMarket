@@ -26,3 +26,9 @@ npm run lint
 ```
 
 vue路由设置为hash模式的时候，window.location.search是取不到值的。要用window.location.hash
+
+
+
+
+
+
