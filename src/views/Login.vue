@@ -117,25 +117,25 @@ export default {
     },
     // 提交
     submit () {
-      if (this.loading) {
-        return
-      }
-      this.loading = true
-      this.$http.login({
-        code: this.messageCode,
-        phone: this.mobile
-      }).then((res) => {
-        this.loading = false
-        if (res.data.code === 1) {
-          localStorage.setItem('token', res.data.response.cont.token)
-          localStorage.setItem('phone', res.data.response.cont.phone)
+      // if (this.loading) {
+      //   return
+      // }
+      // this.loading = true
+      // this.$http.login({
+      //   code: this.messageCode,
+      //   phone: this.mobile
+      // }).then((res) => {
+      //   this.loading = false
+      //   if (res.data.code === 1) {
+      //     localStorage.setItem('token', res.data.response.cont.token)
+      //     localStorage.setItem('phone', res.data.response.cont.phone)
           this.$router.push({
             name: 'loanMarket'
           })
-        } else {
-          Toast(res.data.msg)
-        }
-      })
+      //   } else {
+      //     Toast(res.data.msg)
+      //   }
+      // })
     },
     /* 同意协议 */
     agree () {

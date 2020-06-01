@@ -15,7 +15,7 @@ module.exports = {
     hotOnly: true,
     proxy: {
       '/api': {
-        target: 'http://47.104.189.49:8008',
+        target: 'http://39.100.247.45:9093',
         changeOrigin: true,
         pathRewrite: { '^/api': '' },
         secure: false

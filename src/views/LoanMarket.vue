@@ -1,6 +1,5 @@
 <template>
-  <v-layout>
-      <div class="find-wrapper">
+  <div class="find-wrapper">
         <div class="title-name">下款牛市</div>
         <div id="findBox">
             <!-- banner -->
@@ -54,12 +53,10 @@
             </div>
         </section>
     </div>
-  </v-layout>
 </template>
 
 <script>
 // @ is an alias to /src
-import VLayout from '@/components/Layout.vue'
 import '@/assets/css/about.css'
 import { Toast, Swipe, SwipeItem, MessageBox } from 'mint-ui'
 import * as utils from '@/assets/js/utils'
@@ -73,7 +70,6 @@ export default {
     }
   },
   components: {
-    VLayout,
     'mt-swipe': Swipe,
     'mt-swipe-item': SwipeItem
   },
@@ -92,58 +88,14 @@ export default {
       if(v.applyUrl) {
         window.location.href = v.applyUrl
       } else {
-        const authen = await this.$http.authentication()
-        if (authen && authen.data.code === 1) {
-          this.authenOrapply(v, authen)
-        }
-      }
-    },
-    // 点击申请的逻辑
-    async authenOrapply (v, authen) {
-      const authenticationState = authen.data.response.cont.authenticationState
-      if (authenticationState.identityState === 0 ||
-          authenticationState.livingBodyState === 0 ||
-          authenticationState.operatorState === 0){   // 区分当前环境是安卓还是浏览器
-          if (utils.mobileSyatem() === 'Android') {
-              utils.connectWebViewJavascriptBridge(JSBridge => {
-                JSBridge.callHandler('apply', `${localStorage.getItem('token')}`, encData => {})
-          })
-        } else {
-          this.$router.push({
-            name: 'authentication'
-          })
-        }
-      } else if (authen.data.response.cont.isFirstOrder === 'true') { // 首次申请
-        MessageBox({
-          message: '一键申请最优质资金',
-          confirmButtonText: '好的',
-          closeOnClickModal: false
-        }).then(action => {
-          this.sendApplyMessage(v)
-        })
-      } else if (authen.data.response.cont.isFirstOrder === 'false') { // 有过一键申请
-        this.sendApplyMessage(v)
-      }
-    },
-    // 进件接口
-    async sendApplyMessage (v) {
-      let order = await this.$http.count({ channelId: v.id })
-      if (order && order.data.code === 1) {
-        Toast('申请成功')
-        if(v.applyUrl) {
-          setTimeout(() => {
-            window.location.href = v.applyUrl
-          }, 1000)
-        }
-      } else {
-        Toast(order.data.msg)
+        Toast('申请错误！')
       }
     },
     // 获取 banner 列表
     getLifeBannerList () {
       this.bannerList = [
-        // { imagePath: 'http://dummyimage.com/200x100/FF6600' },
-        { imagePath: 'http://img.1ppt.com/uploads/allimg/1902/1_190218135629_1.jpg' }
+        { imagePath: 'http://dummyimage.com/200x100/FF6600' },
+        // { imagePath: 'http://img.1ppt.com/uploads/allimg/1902/1_190218135629_1.jpg' }
         // { imagePath: 'http://dummyimage.com/200x100/894FC4/FFF.png&text=!' }
       ]
     },

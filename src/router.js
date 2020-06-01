@@ -8,7 +8,7 @@ const router = new Router({
     {
       path: '/',
       redirect: {
-        name: 'login'
+        name: 'loanMarket'
       }
     },
     // 首页

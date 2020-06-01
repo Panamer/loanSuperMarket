@@ -6,9 +6,9 @@ import { mobileSyatem } from './utils.js'
 import { MessageBox } from 'mint-ui'
 import Const from  './const.js'
 // 测试
-// const baseURL = '/api'
+const baseURL = '/api'
 // 生产
-const baseURL = 'http://loanmarketapi.yqhealth.vip'
+// const baseURL = 'http://loanmarketapi.yqhealth.vip'
 
 axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
