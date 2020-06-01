@@ -94,8 +94,8 @@ export default {
     // 获取 banner 列表
     getLifeBannerList () {
       this.bannerList = [
-        { imagePath: 'http://dummyimage.com/200x100/FF6600' },
-        // { imagePath: 'http://img.1ppt.com/uploads/allimg/1902/1_190218135629_1.jpg' }
+        // { imagePath: 'http://dummyimage.com/200x100/FF6600' },
+        { imagePath: 'http://img.1ppt.com/uploads/allimg/1902/1_190218135629_1.jpg' }
         // { imagePath: 'http://dummyimage.com/200x100/894FC4/FFF.png&text=!' }
       ]
     },

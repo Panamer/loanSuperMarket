@@ -9,7 +9,7 @@
             <input type="tel" maxlength="11" placeholder="请输入手机号" v-model.trim="mobile">
           </div>
         </div>
-        <div class="form-item">
+        <!-- <div class="form-item">
           <div>
             <i class="icon-img-code"></i>
             <div class="img-code" @click="getImgCode">
@@ -25,17 +25,17 @@
             <v-message-code ref="messageCode" @click.native="sendMessagecode"></v-message-code>
             <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model.trim="messageCode">
           </div>
-        </div>
+        </div> -->
         <div class="form-btn-wrapper">
           <mt-spinner type="fading-circle" color="#ffffff" :size="20" v-if="loading"></mt-spinner>
           <button class="form-btn" type="submit" :disabled="submitDisabled">{{ loading ? '登录中' : '立即登录' }}</button>
         </div>
-        <div class="agreement">
+        <!-- <div class="agreement">
           <span @click="agree">
             <span :class="isAgree ? 'icon-correct' : 'icon-correct-on'"></span>
             我已阅读并接受<a @click.stop="goAgreement">《服务协议》</a>
           </span>
-        </div>
+        </div> -->
       </form>
     </div>
 </template>
@@ -71,7 +71,8 @@ export default {
   },
   computed: {
     submitDisabled () {
-      return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0 || !this.isAgree
+      return this.mobile.length < 11
+      // return this.mobile.length < 11 || this.imgCode.length === 0 || this.messageCode.length === 0 || !this.isAgree
     }
   },
   mounted () {
