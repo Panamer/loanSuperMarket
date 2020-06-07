@@ -1,7 +1,7 @@
 <template>
-    <div class="login-wrapper">
-      <img class="photo" src="../assets/images/touxiang.png" alt="">
-      <form class="form-wrapper" @submit.prevent="submit">
+    <div class="login-wrapper" @click="handleClick">
+      <!-- <img class="photo" src="../assets/images/touxiang.png" alt=""> -->
+      <form class="form-wrapper">
         <div class="form-item">
           <div>
             <i class="icon-mobile"></i>
@@ -26,10 +26,10 @@
             <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model.trim="messageCode">
           </div>
         </div> -->
-        <div class="form-btn-wrapper">
+        <!-- <div class="form-btn-wrapper">
           <mt-spinner type="fading-circle" color="#ffffff" :size="20" v-if="loading"></mt-spinner>
           <button class="form-btn" type="submit" :disabled="submitDisabled">{{ loading ? '登录中' : '立即登录' }}</button>
-        </div>
+        </div> -->
         <!-- <div class="agreement">
           <span @click="agree">
             <span :class="isAgree ? 'icon-correct' : 'icon-correct-on'"></span>
@@ -115,6 +115,12 @@ export default {
           Toast(res.data.msg)
         }
       })
+    },
+    handleClick() {
+      var  reg = /^1\d{10}$/
+      if (reg.test(this.mobile)) {
+        this.submit();
+      }
     },
     // 提交
     submit () {
