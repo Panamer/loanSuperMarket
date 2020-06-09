@@ -68,6 +68,12 @@ const API = {
     })
     return axios.post('/user/login', qs.stringify(options))
   },
+  log (options = {}) {
+    Object.assign(options, {
+      sign: md5(qs.stringify(options) + '&key=123456').toUpperCase()
+    })
+    return axios.post('/market/log', qs.stringify(options))
+  },
   // 推广登录接口
   loginForSpread (options = {}) {
     // axios.defaults.headers.deviceInfo = JSON.stringify({ channel: mobileSyatem()})

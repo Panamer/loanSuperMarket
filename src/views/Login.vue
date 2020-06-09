@@ -43,6 +43,7 @@
 <script>
 import { Toast, Spinner } from 'mint-ui'
 import VMessageCode from '@/components/MessageCode.vue'
+import { getQueryString } from '../assets/js/utils'
 
 export default {
   name: 'login',
@@ -76,41 +77,22 @@ export default {
     }
   },
   mounted () {
-    this.getImgCode()
+    this.getLog()
   },
   methods: {
+    getLog() {
+      this.$http.log({
+        channel: getQueryString('channel')
+      }).then((res) => {
+        console.log(res.data.code);
+      })
+    },
     // 重新获取图片验证码
     getImgCode () {
       this.$http.getCaptcha().then((res) => {
         if (res.data.code === 1) {
           this.imgCodeSrc = `data:image/*;base64,${res.data.response.cont.captchacont}`
           this.captchakey = res.data.response.cont.captchakey
-        } else {
-          Toast(res.data.msg)
-        }
-      })
-    },
-    // 发送短信验证码
-    sendMessagecode () {
-      if (!this.mobile) {
-        Toast('请输入手机号')
-        return
-      }
-      if (this.mobile.length < 11) {
-        Toast('请输入正确手机号')
-        return
-      }
-      if (!this.imgCode) {
-        Toast('请输入图形验证码')
-        return
-      }
-      this.$http.getMessage({
-        captcha: this.imgCode,
-        captchakey: this.captchakey,
-        phone: this.mobile
-      }).then((res) => {
-        if (res.data.code === 1) {
-          this.$refs.messageCode.getMessageCode()
         } else {
           Toast(res.data.msg)
         }
@@ -124,25 +106,25 @@ export default {
     },
     // 提交
     submit () {
-      // if (this.loading) {
-      //   return
-      // }
-      // this.loading = true
-      // this.$http.login({
-      //   code: this.messageCode,
-      //   phone: this.mobile
-      // }).then((res) => {
-      //   this.loading = false
-      //   if (res.data.code === 1) {
-      //     localStorage.setItem('token', res.data.response.cont.token)
-      //     localStorage.setItem('phone', res.data.response.cont.phone)
+      if (this.loading) {
+        return
+      }
+      this.loading = true
+      this.$http.login({
+        channel: getQueryString('channel'),
+        phone: this.mobile
+      }).then((res) => {
+        this.loading = false
+        if (res.data.code === 1) {
+          localStorage.setItem('token', res.data.response.cont.token)
+          localStorage.setItem('phone', res.data.response.cont.phone)
           this.$router.push({
             name: 'loanMarket'
           })
-      //   } else {
-      //     Toast(res.data.msg)
-      //   }
-      // })
+        } else {
+          Toast(res.data.msg)
+        }
+      })
     },
     /* 同意协议 */
     agree () {
