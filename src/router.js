@@ -5,12 +5,12 @@ Vue.use(Router)
 
 const router = new Router({
   routes: [
-    {
-      path: '/',
-      redirect: {
-        name: 'login'
-      }
-    },
+    // {
+    //   path: '/',
+    //   redirect: {
+    //     name: 'login'
+    //   }
+    // },
     // 首页
     {
       path: '/loanMarket',

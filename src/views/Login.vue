@@ -1,7 +1,7 @@
 <template>
-    <div class="login-wrapper" @click="handleClick">
+    <div class="login-wrapper">
       <!-- <img class="photo" src="../assets/images/touxiang.png" alt=""> -->
-      <form class="form-wrapper">
+      <form class="form-wrapper" @submit.prevent="handleClick">
         <div class="form-item">
           <div>
             <i class="icon-mobile"></i>
@@ -26,10 +26,10 @@
             <input type="text" maxlength="6" placeholder="请输入短信验证码" v-model.trim="messageCode">
           </div>
         </div> -->
-        <!-- <div class="form-btn-wrapper">
+        <div class="form-btn-wrapper" @click="">
           <mt-spinner type="fading-circle" color="#ffffff" :size="20" v-if="loading"></mt-spinner>
           <button class="form-btn" type="submit" :disabled="submitDisabled">{{ loading ? '登录中' : '立即登录' }}</button>
-        </div> -->
+        </div>
         <!-- <div class="agreement">
           <span @click="agree">
             <span :class="isAgree ? 'icon-correct' : 'icon-correct-on'"></span>
@@ -106,15 +106,10 @@ export default {
     },
     // 提交
     submit () {
-      if (this.loading) {
-        return
-      }
-      this.loading = true
       this.$http.login({
         channel: getQueryString('channel'),
         phone: this.mobile
       }).then((res) => {
-        this.loading = false
         if (res.data.code === 1) {
           localStorage.setItem('token', res.data.response.cont.token)
           localStorage.setItem('phone', res.data.response.cont.phone)
@@ -171,10 +166,9 @@ export default {
   }
 }
 .form-btn-wrapper {
-  margin-top: 65px;
   .form-btn {
     letter-spacing: 10px;
-    background-color: #ffffff;
+    background-color: #333322;
   }
 }
 
